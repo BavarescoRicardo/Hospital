@@ -78,7 +78,6 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         btnFiltrar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
-        btnNovo = new javax.swing.JButton();
         campoNome = new javax.swing.JTextField();
         campoCpf = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -134,7 +133,6 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         });
 
         btnRemover.setText("Remover");
-        btnRemover.setEnabled(false);
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverActionPerformed(evt);
@@ -145,13 +143,6 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVoltarActionPerformed(evt);
-            }
-        });
-
-        btnNovo.setText("Novo");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
             }
         });
 
@@ -166,7 +157,6 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         jLabel2.setText("CPF");
 
         btnEditar.setText("Editar");
-        btnEditar.setEnabled(false);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -179,56 +169,54 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(btnFiltrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnRemover)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEditar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 436, Short.MAX_VALUE)
-                .addComponent(btnVoltar))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRemover)
+                .addGap(38, 38, 38)
+                .addComponent(btnEditar)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(0, 742, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(campoCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                            .addComponent(campoNome))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnNovo))))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnFiltrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(campoCpf)
+                        .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(campoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNovo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnFiltrar)
-                        .addComponent(btnRemover)
-                        .addComponent(btnVoltar)
-                        .addComponent(btnEditar))
-                    .addComponent(comboFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnFiltrar)
+                                .addComponent(btnRemover)
+                                .addComponent(btnEditar))
+                            .addComponent(comboFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(179, 179, 179)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -238,39 +226,35 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        TelaNovoFuncionario telaNovoFuncionario = new TelaNovoFuncionario();
-        telaNovoFuncionario.setTabela(tabela);
-
-        painel.repaint();
-        painel.add(telaNovoFuncionario);
-        telaNovoFuncionario.setVisible(true);
-    }//GEN-LAST:event_btnNovoActionPerformed
-
     private void campoCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCpfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoCpfActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-        btnEditar.setEnabled(true);
-        btnRemover.setEnabled(true);
+        //        btnEditar.setEnabled(true);
+        //        btnRemover.setEnabled(true);
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        TelaEditarFuncionario telaEditarFuncionario = new TelaEditarFuncionario();
+        //  conferir se uma lista esta selecionada
+        if (!tabela.getSelectionModel().isSelectionEmpty()) {
 
-        //setar os campos
-        String nomeCargo = tabela.getValueAt(tabela.getSelectedRow(), 4).toString().trim();
-        telaEditarFuncionario.setNomeCargo(nomeCargo);
-        telaEditarFuncionario.setTabela(tabela);
-        telaEditarFuncionario.setTxtNome(tabela.getValueAt(tabela.getSelectedRow(), 1).toString());
-        telaEditarFuncionario.setTxtCpf(tabela.getValueAt(tabela.getSelectedRow(), 2).toString());
-        telaEditarFuncionario.setDataNasc(tabela.getValueAt(tabela.getSelectedRow(), 3).toString());
-        telaEditarFuncionario.setTxtEmail(tabela.getValueAt(tabela.getSelectedRow(), 5).toString());
-        telaEditarFuncionario.setIdFuncionario(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
+            TelaEditarFuncionario telaEditarFuncionario = new TelaEditarFuncionario();
 
-        painel.add(telaEditarFuncionario);
-        telaEditarFuncionario.setVisible(true);
+            //setar os campos
+            String nomeCargo = tabela.getValueAt(tabela.getSelectedRow(), 4).toString().trim();
+            telaEditarFuncionario.setNomeCargo(nomeCargo);
+            telaEditarFuncionario.setTabela(tabela);
+            telaEditarFuncionario.setTxtNome(tabela.getValueAt(tabela.getSelectedRow(), 1).toString());
+            telaEditarFuncionario.setTxtCpf(tabela.getValueAt(tabela.getSelectedRow(), 2).toString());
+            telaEditarFuncionario.setDataNasc(tabela.getValueAt(tabela.getSelectedRow(), 3).toString());
+            telaEditarFuncionario.setTxtEmail(tabela.getValueAt(tabela.getSelectedRow(), 5).toString());
+            telaEditarFuncionario.setIdFuncionario(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
+
+            painel.add(telaEditarFuncionario);
+            telaEditarFuncionario.setVisible(true);
+        }else
+            JOptionPane.showMessageDialog(rootPane, "Selecione um Funcionario !");
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
@@ -289,16 +273,17 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
             int tam;
             Object linha[] = new Object[funcionarioDao.listar().size()];
             for (Funcionario funcionario : funcionarioDao.listar()) {
-                dtm.insertRow(dtm.getRowCount(), new Object[]{funcionario.getIdFuncionario(), funcionario.getNOME(), funcionario.getCPF(), funcionario.getDataNascimento(),funcionario.getTipoFuncionario().getDescricao(), funcionario.getEMAIL()});
+                dtm.insertRow(dtm.getRowCount(), new Object[]{funcionario.getIdFuncionario(), funcionario.getNOME(), funcionario.getCPF(), funcionario.getDataNascimento(), funcionario.getTipoFuncionario().getDescricao(), funcionario.getEMAIL()});
             }
-            
+
             JOptionPane.showMessageDialog(rootPane, "Removido ");
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Escolha uma linha ! ");
+            JOptionPane.showMessageDialog(rootPane, "Escolha um Funcionario ! ");
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        funcionarioDao.filtroNome("Jose");
         /* tratar filtro
         if (comboFiltro.getSelectedItem()!= null || !comboFiltro.getSelectedItem().equals("Escolha") ) {
             
@@ -333,7 +318,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, "Escolha um filtro primeiro " + dtm.getValueAt(tabela.getSelectedRow(), 1));
         }
-        */
+         */
 
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
@@ -341,7 +326,6 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnFiltrar;
-    private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JFormattedTextField campoCpf;

@@ -89,8 +89,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnMedicamento = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btnFuncionario = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         btnListaPacient = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         ImageIcon fundo = new ImageIcon(getClass().getResource("/imagens/fundo.jpg"));
         Image img = fundo.getImage();
         painelDesktop = new javax.swing.JDesktopPane(){
@@ -114,8 +114,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.GridLayout(2, 3, 30, 20));
         jPanel1.add(jLabel2);
 
-        lblLogo.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
-        lblLogo.setForeground(new java.awt.Color(99, 88, 83));
+        lblLogo.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
+        lblLogo.setForeground(new java.awt.Color(44, 26, 22));
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLogo.setText("Hospital Hiber");
         jPanel1.add(lblLogo);
@@ -175,10 +175,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         painelBotoes.add(btnFuncionario);
 
-        jButton3.setText("Prontuario");
-        jButton3.setEnabled(false);
-        painelBotoes.add(jButton3);
-
         btnListaPacient.setText("Paciente");
         btnListaPacient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,6 +182,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         painelBotoes.add(btnListaPacient);
+
+        jButton3.setText(".");
+        jButton3.setEnabled(false);
+        painelBotoes.add(jButton3);
 
         jPanel3.setBackground(new java.awt.Color(254, 254, 254));
         jPanel3.setLayout(new java.awt.GridLayout(2, 4, 50, 10));
@@ -206,7 +206,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jPanel3.add(jButton8);
 
-        jButton6.setText("jButton6");
+        jButton6.setText(".");
+        jButton6.setEnabled(false);
         jPanel3.add(jButton6);
 
         btnNovoPaciente.setText("Novo Paciente");
@@ -217,10 +218,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jPanel3.add(btnNovoPaciente);
 
-        jButton5.setText("jButton5");
+        jButton5.setText(".");
+        jButton5.setEnabled(false);
         jPanel3.add(jButton5);
 
-        jButton1.setText("jButton1");
+        jButton1.setText(".");
+        jButton1.setEnabled(false);
         jPanel3.add(jButton1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

@@ -16,7 +16,7 @@ import servico.Gerenciador;
  * @author sk
  */
 public class FuncionarioDao {
-    
+
     private EntityManager em;
 
     public FuncionarioDao() {
@@ -38,6 +38,24 @@ public class FuncionarioDao {
         return lista;
     }
     
+     public List<Funcionario> filtroNome(String filtro){
+        List<Funcionario> lista = new ArrayList<Funcionario>();
+        
+       // string hql = “from Produto p where p.nome like :nome”;
+    // IQuery q = session.CreateQuery(hql);
+    // q.SetString(“nome”, “%” + aqui_vai_o_valor+ “%”);
+        
+         lista = em.createQuery("from Funcionario f WHERE Funcionario.NOME = Jose%").getResultList();
+          System.out.println("Resultado do filtro");
+           for (Funcionario f : lista){
+               
+               System.out.println(" "+f.getNOME());
+               
+           }
+        
+        return lista;
+    }
+    
     public void remove(Funcionario f){
         em.getTransaction().begin();
         em.remove(f);
@@ -53,5 +71,6 @@ public class FuncionarioDao {
        public Funcionario getById (int id){
         return em.find(Funcionario.class, id);
     }
+
     
 }
