@@ -22,7 +22,17 @@ public class MedicamentoDao {
     public MedicamentoDao() {
         this.em = Gerenciador.getInstancia().getEm();
     }
+        
+    public Medicamento getById(int id){
+        return em.find(Medicamento.class,id);
+    }
     
+      public void alterar (Medicamento m) {
+
+        em.getTransaction().begin();
+        em.merge(m);
+        em.getTransaction().commit();
+    }
     
     public void salvar(Medicamento m) {
 

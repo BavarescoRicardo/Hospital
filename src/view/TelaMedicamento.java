@@ -27,10 +27,11 @@ public class TelaMedicamento extends javax.swing.JInternalFrame {
         MedicamentoDao medicamentoDao = new MedicamentoDao();
         lista = medicamentoDao.listar();
 
-        Object rowData[] = new Object[1];
+        Object rowData[] = new Object[2];
         dtm.setRowCount(0);
         for (Medicamento m : lista) {
-            rowData[0] = m.getNome();
+            rowData[0] = m.getIdMedicamento();
+            rowData[1] = m.getNome();
             
             dtm.addRow(rowData);
         }
@@ -54,6 +55,7 @@ public class TelaMedicamento extends javax.swing.JInternalFrame {
         campoMedicamento = new javax.swing.JTextField();
         btnInserir = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(236, 209, 200));
 
@@ -70,27 +72,23 @@ public class TelaMedicamento extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Medicamento"
+                "ID", "Medicamento"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false
+                java.lang.Object.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
         });
         jScrollPane1.setViewportView(tabela);
         if (tabela.getColumnModel().getColumnCount() > 0) {
-            tabela.getColumnModel().getColumn(0).setResizable(false);
+            tabela.getColumnModel().getColumn(0).setMinWidth(20);
+            tabela.getColumnModel().getColumn(0).setPreferredWidth(25);
+            tabela.getColumnModel().getColumn(0).setMaxWidth(30);
+            tabela.getColumnModel().getColumn(1).setResizable(false);
         }
 
         jLabel1.setText("Medicamento");
@@ -106,6 +104,13 @@ public class TelaMedicamento extends javax.swing.JInternalFrame {
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -125,6 +130,8 @@ public class TelaMedicamento extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -140,10 +147,12 @@ public class TelaMedicamento extends javax.swing.JInternalFrame {
                     .addComponent(campoMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -207,11 +216,28 @@ public class TelaMedicamento extends javax.swing.JInternalFrame {
                 dtm.insertRow(dtm.getRowCount(), new Object[]{me.getNome()});
             }
 
-        }
+        }else
+            JOptionPane.showMessageDialog(rootPane, "Selecione um Medicamento !");
     }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        
+            if (!tabela.getSelectionModel().isSelectionEmpty()){
+            int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
+            MedicamentoDao dao = new MedicamentoDao();
+            Medicamento m = dao.getById(id);
+            m.setNome(tabela.getValueAt(tabela.getSelectedRow(), 1).toString());
+            dao.alterar(m);
+            
+            JOptionPane.showMessageDialog(rootPane, "Alterado com sucesso !");
+        }else
+            JOptionPane.showMessageDialog(rootPane, "Selecione um Medicamento !");
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnVoltar;

@@ -126,6 +126,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         }
 
         btnFiltrar.setText("Filtrar");
+        btnFiltrar.setEnabled(false);
         btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFiltrarActionPerformed(evt);
@@ -283,7 +284,7 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
-        funcionarioDao.filtroNome("Jose");
+        //funcionarioDao.filtroNome("Jose");
         /* tratar filtro
         if (comboFiltro.getSelectedItem()!= null || !comboFiltro.getSelectedItem().equals("Escolha") ) {
             

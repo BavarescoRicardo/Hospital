@@ -25,7 +25,17 @@ public class DoencaDao {
         this.em = Gerenciador.getInstancia().getEm();
     }
     
+    public Doenca getById(int id){
+        return em.find(Doenca.class,id);
+    }
     
+      public void alterar(Doenca d) {
+
+        em.getTransaction().begin();
+        em.merge(d);
+        em.getTransaction().commit();
+    }
+            
     public void salvar(Doenca d) {
 
         em.getTransaction().begin();
