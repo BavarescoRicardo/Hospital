@@ -126,7 +126,6 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
         }
 
         btnFiltrar.setText("Filtrar");
-        btnFiltrar.setEnabled(false);
         btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFiltrarActionPerformed(evt);
@@ -284,17 +283,17 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
-        //funcionarioDao.filtroNome("Jose");
-        /* tratar filtro
+        
+        // tratar filtro
         if (comboFiltro.getSelectedItem()!= null || !comboFiltro.getSelectedItem().equals("Escolha") ) {
             
             if (comboFiltro.getSelectedIndex() == 1) {
                 dtm.setRowCount(0);
-                for (Funcionario funcionario : funcionarioDao.filtroFuncionario(campoNome.getText().toString())) {
+                for (Funcionario funcionario : funcionarioDao.filtroNome(campoNome.getText().toString()) ) {
                     dtm.insertRow(dtm.getRowCount(), new Object[]{funcionario.getIdFuncionario(), funcionario.getNOME(), funcionario.getCPF(), funcionario.getDataNascimento(), funcionario.getTipoFuncionario().getDescricao(), funcionario.getEMAIL()});
                 }
 
-            } else if (comboFiltro.getSelectedIndex() == 2) {
+            } /*else if (comboFiltro.getSelectedIndex() == 2) {
                 dtm.setRowCount(0);
                 String filtro = campoCpf.getText();
 
@@ -313,13 +312,13 @@ public class TelaFuncionario extends javax.swing.JInternalFrame {
                     dtm.insertRow(dtm.getRowCount(), new Object[]{funcionario.getIdFuncionario(), funcionario.getNOME(), funcionario.getCPF(), funcionario.getDataNascimento(),funcionario.getTipoFuncionario().getDescricao(), funcionario.getEMAIL()});
                 }
 
-            }
+            }*/
             campoNome.setText("");
             campoCpf.setText("");
         } else {
             JOptionPane.showMessageDialog(rootPane, "Escolha um filtro primeiro " + dtm.getValueAt(tabela.getSelectedRow(), 1));
         }
-         */
+         
 
     }//GEN-LAST:event_btnFiltrarActionPerformed
 

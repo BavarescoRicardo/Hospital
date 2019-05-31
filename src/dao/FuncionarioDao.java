@@ -8,6 +8,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import modelo.Funcionario;
 import servico.Gerenciador;
 
@@ -44,12 +45,14 @@ public class FuncionarioDao {
        // string hql = “from Produto p where p.nome like :nome”;
     // IQuery q = session.CreateQuery(hql);
     // q.SetString(“nome”, “%” + aqui_vai_o_valor+ “%”);
-        
-         lista = em.createQuery("from Funcionario f WHERE Funcionario.NOME = Jose%").getResultList();
-          System.out.println("Resultado do filtro");
+         System.out.println("Filtrar os funcionario pelo nome iniciando com: J");
+    
+         Query q = em.createQuery("from Funcionario f WHERE f.NOME like :filtro");
+          q.setParameter("filtro", filtro+"%");
+          lista = (List<Funcionario>) q.getResultList();
            for (Funcionario f : lista){
                
-               System.out.println(" "+f.getNOME());
+               System.out.println(f.getNOME());
                
            }
         
