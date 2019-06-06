@@ -7,14 +7,30 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Ricardo
  */
+
+@Entity
 public class Quarto {
-    private int idQuarto,idTipoQuarto;
+    @Id 
+    @GeneratedValue(strategy=GenerationType.IDENTITY) 
+    private int idQuarto;
+   
+    @Column
     private String descricao;
+    
+    @ManyToOne 
+    private TipoQuarto tipoQuarto;
+   
 
     public int getIdQuarto() {
         return idQuarto;
@@ -24,12 +40,12 @@ public class Quarto {
         this.idQuarto = idQuarto;
     }
 
-    public int getIdTipoQuarto() {
-        return idTipoQuarto;
+    public TipoQuarto getIdTipoQuarto() {
+        return tipoQuarto;
     }
 
-    public void setIdTipoQuarto(int idTipoQuarto) {
-        this.idTipoQuarto = idTipoQuarto;
+    public void setIdTipoQuarto(TipoQuarto tipoQuarto) {
+        this.tipoQuarto = tipoQuarto;
     }
 
     public String getDescricao() {
@@ -43,8 +59,8 @@ public class Quarto {
     public Quarto() {
     }
 
-    public Quarto(int idTipoQuarto, String descricao) {
-        this.idTipoQuarto = idTipoQuarto;
+    public Quarto(TipoQuarto tipoQuarto, String descricao) {
+        this.tipoQuarto = tipoQuarto;
         this.descricao = descricao;
     }
 

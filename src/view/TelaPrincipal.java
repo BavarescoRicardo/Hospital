@@ -27,14 +27,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         JMenuItem menuSobre = new JMenuItem("Sobre");
-        JMenuItem menuFuncao = new JMenuItem("Funcao");
-        
+        JMenuItem menuFuncao = new JMenuItem("Funcao");       
         JMenuItem menuGrid = new JMenuItem("Layout");
+        JMenuItem menuAla = new JMenuItem("Tipo Quarto (ALA)");
     
         
         menuTelas.add(menuSobre);
         menuTelas.add(menuFuncao);
         menuTelas.add(menuGrid);
+        menuTelas.add(menuAla);
         
         
         menuSobre.addActionListener(new ActionListener() {
@@ -62,6 +63,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                  TelaGridLayout telaGridLayout = new TelaGridLayout();
                  telaGridLayout.setVisible(true);
+            }
+        });
+       
+       menuAla.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaNovaAla telaNovaAla = new TelaNovaAla();               
+                
+                painelDesktop.repaint();
+                painelDesktop.add(telaNovaAla);
+                telaNovaAla.setVisible(true);
             }
         });
         
@@ -103,7 +115,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         btnNovoPaciente = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnQuarto = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         menuTelas = new javax.swing.JMenu();
@@ -218,9 +230,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jPanel3.add(btnNovoPaciente);
 
-        jButton5.setText(".");
-        jButton5.setEnabled(false);
-        jPanel3.add(jButton5);
+        btnQuarto.setText("Quarto");
+        btnQuarto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuartoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnQuarto);
 
         jButton1.setText(".");
         jButton1.setEnabled(false);
@@ -332,6 +348,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelDesktop.add(telaListarPacient);
     }//GEN-LAST:event_btnListaPacientActionPerformed
 
+    private void btnQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuartoActionPerformed
+        
+        TelaQuarto telaQuarto = new TelaQuarto();
+        telaQuarto.setVisible(true);
+        painelDesktop.add(telaQuarto);
+        
+    }//GEN-LAST:event_btnQuartoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -373,10 +397,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnListaPacient;
     private javax.swing.JButton btnMedicamento;
     private javax.swing.JButton btnNovoPaciente;
+    private javax.swing.JButton btnQuarto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

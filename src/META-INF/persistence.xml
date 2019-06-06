@@ -7,6 +7,10 @@
     <class>modelo.Funcionario</class>
     <class>modelo.TipoFuncionario</class>
     <class>modelo.Medico</class>
+    <class>modelo.TipoQuarto</class>
+    <class>modelo.Paciente</class>
+    <class>modelo.Quarto</class>
+    <validation-mode>NONE</validation-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernateHospital?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -5,12 +5,22 @@
  */
 package modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author Ricardo
  */
+@Entity
 public class TipoQuarto {
+    @Id 
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idTipoQuarto;
+    @Column
     private String nome;
 
     public int getIdTipoQuarto() {
