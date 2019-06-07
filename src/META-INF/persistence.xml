@@ -10,6 +10,7 @@
     <class>modelo.TipoQuarto</class>
     <class>modelo.Paciente</class>
     <class>modelo.Quarto</class>
+    <class>modelo.Leito</class>
     <validation-mode>NONE</validation-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernateHospital?zeroDateTimeBehavior=convertToNull"/>

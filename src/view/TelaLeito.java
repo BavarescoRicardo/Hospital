@@ -5,57 +5,53 @@
  */
 package view;
 
+import dao.LeitoDao;
 import dao.QuartoDao;
 import dao.TipoQuartoDao;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Leito;
 import modelo.Quarto;
-import modelo.TipoQuarto;
 
 /**
  *
  * @author blank
  */
-public class TelaQuarto extends javax.swing.JInternalFrame {
+public class TelaLeito extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form TelaQuarto
      */
-    private JDesktopPane painelDktp;
-    private TipoQuartoDao tipoQuartoDao = new TipoQuartoDao();
+    
     private QuartoDao quartoDao = new QuartoDao();
+    private LeitoDao leitoDao = new LeitoDao();
     private DefaultTableModel dtm;
-
-    public TelaQuarto() {
+    private int idQuarto;
+    
+    public TelaLeito() {
         initComponents();
         dtm = (DefaultTableModel) tabela.getModel();
-
-        DefaultComboBoxModel comboModel = (DefaultComboBoxModel) comboAla.getModel();
-        //removendo todos os elementos do combo
-        comboModel.removeAllElements();
-
-        for (TipoQuarto tipo : tipoQuartoDao.listar()) {
-            comboModel.addElement(tipo);
-        }
-
+        
         attTabela();
-
+        
+        
         txtQuarto.setText("");
     }
-
-    public void attTabela() {
-
-        for (Quarto quarto : quartoDao.listar()) {
-            dtm.addRow(new Object[]{quarto.getIdQuarto(), quarto.getDescricao(), quarto.getIdTipoQuarto().getNome()});
+    
+    public void attTabela(){
+        
+        for (Leito leito : leitoDao.listar()){
+            dtm.addRow(new Object[]{leito.getIdLeito(),leito.getDescricao(),leito.getIdQuarto().getDescricao()});
         }
-
+        
     }
 
-    public void setPainelDktp(JDesktopPane painelDktp) {
-        this.painelDktp = painelDktp;
+    public void setIdQuarto(int idQuarto) {
+        
+        this.idQuarto = idQuarto;
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,10 +65,9 @@ public class TelaQuarto extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         txtQuarto = new javax.swing.JTextField();
-        comboAla = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
-        btnNovoLeito = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
 
@@ -87,24 +82,29 @@ public class TelaQuarto extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Leito do quarto:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtQuarto)
-                    .addComponent(comboAla, 0, 160, Short.MAX_VALUE))
+                .addComponent(txtQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(comboAla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -115,13 +115,6 @@ public class TelaQuarto extends javax.swing.JInternalFrame {
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVoltarActionPerformed(evt);
-            }
-        });
-
-        btnNovoLeito.setText("Novo Leito");
-        btnNovoLeito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoLeitoActionPerformed(evt);
             }
         });
 
@@ -158,9 +151,7 @@ public class TelaQuarto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnNovoLeito, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
@@ -172,15 +163,10 @@ public class TelaQuarto extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btnNovoLeito, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(46, 46, 46)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -202,41 +188,27 @@ public class TelaQuarto extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void btnNovoLeitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoLeitoActionPerformed
-        if (!tabela.getSelectionModel().isSelectionEmpty()) {
-            TelaLeito leito = new TelaLeito();
-            leito.setVisible(true);
-            leito.setLocation(painelDktp.getWidth()/2 - leito.getWidth()/2,
-            painelDktp.getHeight()/2 - leito.getHeight()/2);
-            leito.setIdQuarto(Integer.parseInt(dtm.getValueAt(tabela.getSelectedRow(), 0).toString()));
-            painelDktp.add(leito);
-        }else
-            JOptionPane.showMessageDialog(rootPane, "Selecione um quarto da tabela !");
-    }//GEN-LAST:event_btnNovoLeitoActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (!txtQuarto.equals("")) {
-            TipoQuarto tipoQu = (TipoQuarto) comboAla.getSelectedItem();
-            Quarto q = new Quarto(tipoQu, txtQuarto.getText());
-
-            txtQuarto.setText("");
-
-            quartoDao.salvar(q);
-
-            JOptionPane.showMessageDialog(rootPane, "Quarto inserido !");
-            dtm.setRowCount(0);
-            attTabela();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Informe o quarto e a Ala");
-        }
+        if (!txtQuarto.equals("")){
+          Quarto q = (Quarto) quartoDao.getById(idQuarto);
+          Leito l = new Leito(q, txtQuarto.getText());
+          
+          txtQuarto.setText("");
+          
+          leitoDao.salvar(l);
+          
+          JOptionPane.showMessageDialog(rootPane, "Leito inserido !");
+          dtm.setRowCount(0);
+          attTabela();
+        }else
+            JOptionPane.showMessageDialog(rootPane, "Informe o leito e o quarto");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNovoLeito;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JComboBox<String> comboAla;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

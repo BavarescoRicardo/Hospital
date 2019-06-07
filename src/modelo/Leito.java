@@ -5,16 +5,29 @@
  */
 package modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  *
  * @author Ricardo
  */
+@Entity
 public class Leito {
-    private int idLeito,idQuarto;
+    @Id 
+    @GeneratedValue(strategy=GenerationType.IDENTITY) 
+    private int idLeito;
+    @ManyToOne
+    private Quarto quarto;
+    @Column
     private String descricao;
 
-    public Leito(int idQuarto, String descricao) {
-        this.idQuarto = idQuarto;
+    public Leito(Quarto quarto, String descricao) {
+        this.quarto = quarto;
         this.descricao = descricao;
     }
 
@@ -26,12 +39,12 @@ public class Leito {
         this.idLeito = idLeito;
     }
 
-    public int getIdQuarto() {
-        return idQuarto;
+    public Quarto getIdQuarto() {
+        return quarto;
     }
 
-    public void setIdQuarto(int idQuarto) {
-        this.idQuarto = idQuarto;
+    public void setIdQuarto(Quarto idQuarto) {
+        this.quarto = idQuarto;
     }
 
     public String getDescricao() {

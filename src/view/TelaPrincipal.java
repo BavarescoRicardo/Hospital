@@ -351,6 +351,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuartoActionPerformed
         
         TelaQuarto telaQuarto = new TelaQuarto();
+        telaQuarto.setPainelDktp(painelDesktop);
         telaQuarto.setVisible(true);
         painelDesktop.add(telaQuarto);
         
