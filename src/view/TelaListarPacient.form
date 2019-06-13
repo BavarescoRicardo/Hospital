@@ -46,6 +46,8 @@
               <Group type="102" attributes="0">
                   <Component id="btnVoltar" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnProntuario" min="-2" pref="100" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnRemover" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnEditar" min="-2" pref="100" max="-2" attributes="0"/>
@@ -63,6 +65,7 @@
                       <Component id="btnVoltar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="btnRemover" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="btnEditar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="btnProntuario" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -147,6 +150,12 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnProntuario">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Prontuario"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

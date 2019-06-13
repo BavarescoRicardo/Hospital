@@ -7,25 +7,40 @@ package modelo;
 
 
 import java.sql.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 
 /**
  *
  * @author Ricardo
  */
-public class Prontuario {
-    private Prontuario prontuario;
-    private Paciente paciente;
-    private Leito leito;
-    private Medico medico;
-    private java.sql.Date dataEntrada,dataAlta;
 
-    public Prontuario getProntuario() {
-        return prontuario;
+@Entity
+public class Prontuario {
+    @Id 
+    @GeneratedValue(strategy=GenerationType.IDENTITY) 
+    private int idProntuario;
+    @ManyToOne
+    private Paciente paciente;
+    @ManyToOne
+    private Leito leito;
+    @ManyToOne
+    private Medico medico;
+    // @Temporal
+    private java.sql.Date dataEntrada;
+    private java.sql.Date dataAlta;
+
+    public int getProntuario() {
+        return idProntuario;
     }
 
-    public void setProntuario(Prontuario prontuario) {
-        this.prontuario = prontuario;
+    public void setProntuario(int prontuario) {
+        this.idProntuario = prontuario;
     }
 
     public Paciente getPaciente() {
@@ -72,8 +87,8 @@ public class Prontuario {
     public Prontuario() {
     }
 
-    public Prontuario(Prontuario prontuario, Paciente paciente, Leito leito, Medico medico, Date dataEntrada) {
-        this.prontuario = prontuario;
+    public Prontuario(int prontuario, Paciente paciente, Leito leito, Medico medico, Date dataEntrada) {
+        this.idProntuario = prontuario;
         this.paciente = paciente;
         this.leito = leito;
         this.medico = medico;

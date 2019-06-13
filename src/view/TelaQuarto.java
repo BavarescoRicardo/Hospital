@@ -205,10 +205,12 @@ public class TelaQuarto extends javax.swing.JInternalFrame {
     private void btnNovoLeitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoLeitoActionPerformed
         if (!tabela.getSelectionModel().isSelectionEmpty()) {
             TelaLeito leito = new TelaLeito();
+            
+            // passa o id do quarto para a tela de leitos 
+            leito.setIdQuarto(Integer.parseInt(dtm.getValueAt(tabela.getSelectedRow(), 0).toString()));
             leito.setVisible(true);
             leito.setLocation(painelDktp.getWidth()/2 - leito.getWidth()/2,
             painelDktp.getHeight()/2 - leito.getHeight()/2);
-            leito.setIdQuarto(Integer.parseInt(dtm.getValueAt(tabela.getSelectedRow(), 0).toString()));
             painelDktp.add(leito);
         }else
             JOptionPane.showMessageDialog(rootPane, "Selecione um quarto da tabela !");

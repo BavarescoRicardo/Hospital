@@ -39,11 +39,11 @@ public class Leito {
         this.idLeito = idLeito;
     }
 
-    public Quarto getIdQuarto() {
+    public Quarto getQuarto() {
         return quarto;
     }
 
-    public void setIdQuarto(Quarto idQuarto) {
+    public void setQuarto(Quarto idQuarto) {
         this.quarto = idQuarto;
     }
 

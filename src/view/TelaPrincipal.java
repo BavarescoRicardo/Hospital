@@ -37,6 +37,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuTelas.add(menuGrid);
         menuTelas.add(menuAla);
         
+        lblListar.setVisible(false);
+        lblIncluir.setVisible(false);
         
         menuSobre.addActionListener(new ActionListener() {
             @Override
@@ -94,7 +96,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblListar = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lblIcluir = new javax.swing.JLabel();
+        lblIncluir = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         painelBotoes = new javax.swing.JPanel();
         btnDoenca = new javax.swing.JButton();
@@ -136,16 +138,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblListar.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         lblListar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblListar.setText("Listar");
+        lblListar.setFocusable(false);
         lblListar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jPanel1.add(lblListar);
         jPanel1.add(jLabel3);
 
-        lblIcluir.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        lblIcluir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIcluir.setText("Incluir");
-        lblIcluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        lblIcluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(lblIcluir);
+        lblIncluir.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        lblIncluir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIncluir.setText("Incluir");
+        lblIncluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lblIncluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(lblIncluir);
 
         jPanel2.setBackground(new java.awt.Color(254, 254, 254));
 
@@ -411,7 +414,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel lblIcluir;
+    private javax.swing.JLabel lblIncluir;
     private javax.swing.JLabel lblListar;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JMenuBar menuBar;

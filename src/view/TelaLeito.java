@@ -33,16 +33,17 @@ public class TelaLeito extends javax.swing.JInternalFrame {
         initComponents();
         dtm = (DefaultTableModel) tabela.getModel();
         
-        attTabela();
+       // attTabela();
         
         
         txtQuarto.setText("");
     }
     
-    public void attTabela(){
+    private void attTabela(){
         
         for (Leito leito : leitoDao.listar()){
-            dtm.addRow(new Object[]{leito.getIdLeito(),leito.getDescricao(),leito.getIdQuarto().getDescricao()});
+            if(idQuarto == leito.getQuarto().getIdQuarto())
+                dtm.addRow(new Object[]{leito.getIdLeito(),leito.getDescricao(),leito.getQuarto().getDescricao()});
         }
         
     }
@@ -50,6 +51,7 @@ public class TelaLeito extends javax.swing.JInternalFrame {
     public void setIdQuarto(int idQuarto) {
         
         this.idQuarto = idQuarto;
+        attTabela();
     }
     
 
@@ -123,11 +125,11 @@ public class TelaLeito extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id", "Quarto", "Ala medica"
+                "Id", "Leito", "Quarto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
