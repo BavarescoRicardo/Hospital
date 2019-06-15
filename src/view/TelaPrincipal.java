@@ -31,6 +31,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         JMenuItem menuGrid = new JMenuItem("Layout");
         JMenuItem menuAla = new JMenuItem("Tipo Quarto (ALA)");
     
+        TelaLogin log = new TelaLogin();
+        log.setVisible(true);
         
         menuTelas.add(menuSobre);
         menuTelas.add(menuFuncao);

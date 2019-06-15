@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 /**
  *
@@ -17,7 +18,8 @@ import org.hibernate.envers.Audited;
  */
 
 @Entity
-@Audited(modifiedColumnName = "verificaMed")
+@Audited
+@AuditTable("Auditorio_Medico")
 @Table
 public class Medico {
     @Id 

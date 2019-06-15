@@ -10,12 +10,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 
 /**
  *
  * @author Ricardo
  */
 @Entity
+@Audited
+@AuditTable("Auditoria_Paciente")
 public class Paciente {
     @Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
