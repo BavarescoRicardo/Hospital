@@ -30,9 +30,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         JMenuItem menuFuncao = new JMenuItem("Funcao");       
         JMenuItem menuGrid = new JMenuItem("Layout");
         JMenuItem menuAla = new JMenuItem("Tipo Quarto (ALA)");
-    
-        TelaLogin log = new TelaLogin();
-        log.setVisible(true);
+        
+        // Exibe a janela de login
+        
+        TelaUser user = new TelaUser(this, rootPaneCheckingEnabled);
+        user.setLocationRelativeTo(null);
+        user.setPrincipal(this);
+        user.setVisible(true);
+       
         
         menuTelas.add(menuSobre);
         menuTelas.add(menuFuncao);
@@ -125,6 +130,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuTelas = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setEnabled(false);
 
         jPanel1.setBackground(new java.awt.Color(171, 171, 171));
         jPanel1.setLayout(new java.awt.GridLayout(2, 3, 30, 20));
