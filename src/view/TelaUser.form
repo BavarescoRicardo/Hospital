@@ -56,7 +56,7 @@
                           <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel2" alignment="0" min="-2" pref="65" max="-2" attributes="0"/>
                               <Component id="txtUser" alignment="0" pref="250" max="32767" attributes="0"/>
@@ -77,9 +77,9 @@
                   <Component id="txtUser" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="30" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="txtPwd" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <Component id="txtPwd" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnFechar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnLogin" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -118,7 +118,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtUser">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPwd">
+        <Component class="javax.swing.JPasswordField" name="txtPwd">
         </Component>
       </SubComponents>
     </Container>

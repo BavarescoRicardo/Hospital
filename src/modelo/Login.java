@@ -19,8 +19,8 @@ public class Login {
     @Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY) 
     private int id;
-    private String usuario;
-    private String senha;
+    private static String usuario;
+    private static  String senha;
 
     public Login() {
     }
@@ -30,20 +30,20 @@ public class Login {
         this.senha = senha;
     }
 
-    public String getUsuario() {
+    public static String getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public static void setUsuario(String usuario) {
+        Login.usuario = usuario;
     }
 
-    public String getSenha() {
+    public static String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public static void setSenha(String senha) {
+        Login.senha = senha;
     }
     
     

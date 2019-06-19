@@ -15,7 +15,10 @@ import modelo.Login;
  * @author blank
  */
 public class TelaUser extends javax.swing.JDialog {
+
     private JFrame principal;
+    private boolean log = false;
+
     /**
      * Creates new form TelaUser
      */
@@ -39,7 +42,7 @@ public class TelaUser extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
-        txtPwd = new javax.swing.JTextField();
+        txtPwd = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,9 +97,9 @@ public class TelaUser extends javax.swing.JDialog {
                 .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
+                .addComponent(txtPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFechar)
                     .addComponent(btnLogin))
@@ -123,16 +126,26 @@ public class TelaUser extends javax.swing.JDialog {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         LoginDao dao = new LoginDao();
-        Login login = new Login(txtUser.getText(), txtPwd.getText());
-
-        for (Login l : dao.listar()){
-            if (l.getUsuario().equals(login.getUsuario())){
-                JOptionPane.showMessageDialog(rootPane, "Logado Usuario:  "+login.getUsuario());
+        Login.setUsuario(txtUser.getText());
+        Login.setSenha(txtPwd.getText());
+        log = false;
+        
+        for (Login l : dao.listar()) {
+            if (l.getUsuario().equals(Login.getUsuario()) && l.getSenha().equals(Login.getSenha())) {
+                txtUser.setText("");
+                txtPwd.setText("");
+                JOptionPane.showMessageDialog(rootPane, "Logado Usuario:  " + Login.getUsuario());
                 principal.setEnabled(true);
                 this.setVisible(false);
-            }/*else
-            JOptionPane.showMessageDialog(rootPane, "Usuario nao encontrado  "+login.getUsuario()+" !! ");
-            */
+                log = true;
+                break;
+            }
+
+        }
+        if (!log) {
+            JOptionPane.showMessageDialog(rootPane, "Usuario nao encontrado  " + Login.getUsuario() + " !! ");
+            txtUser.setText("");
+            txtPwd.setText("");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -188,7 +201,7 @@ public class TelaUser extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtPwd;
+    private javax.swing.JPasswordField txtPwd;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }
