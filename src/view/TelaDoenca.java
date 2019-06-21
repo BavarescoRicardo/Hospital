@@ -200,7 +200,7 @@ public class TelaDoenca extends javax.swing.JInternalFrame {
             listaDoenca = dao.listar();
             dtm.setRowCount(0);
             for (Doenca d : listaDoenca) {
-                dtm.insertRow(dtm.getRowCount(), new Object[]{d.getNome()});
+                dtm.insertRow(dtm.getRowCount(), new Object[]{d.getIdDoenca(),d.getNome()});
             }
             JOptionPane.showMessageDialog(rootPane,"Doença inserida"); 
             

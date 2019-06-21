@@ -44,7 +44,8 @@ public class TelaUser extends javax.swing.JDialog {
         txtUser = new javax.swing.JTextField();
         txtPwd = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(251, 252, 254));
 
@@ -125,16 +126,16 @@ public class TelaUser extends javax.swing.JDialog {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+
         LoginDao dao = new LoginDao();
-        Login.setUsuario(txtUser.getText());
-        Login.setSenha(txtPwd.getText());
+        Login login = new Login(txtUser.getText(),txtPwd.getText());
         log = false;
         
         for (Login l : dao.listar()) {
-            if (l.getUsuario().equals(Login.getUsuario()) && l.getSenha().equals(Login.getSenha())) {
+            if (l.getUsuario().equals(Login.NOME) && l.getSenha().equals(Login.PWD)) {
                 txtUser.setText("");
                 txtPwd.setText("");
-                JOptionPane.showMessageDialog(rootPane, "Logado Usuario:  " + Login.getUsuario());
+                JOptionPane.showMessageDialog(rootPane, "Logado Usuario:  " + Login.NOME);
                 principal.setEnabled(true);
                 this.setVisible(false);
                 log = true;
@@ -143,10 +144,12 @@ public class TelaUser extends javax.swing.JDialog {
 
         }
         if (!log) {
-            JOptionPane.showMessageDialog(rootPane, "Usuario nao encontrado  " + Login.getUsuario() + " !! ");
+            JOptionPane.showMessageDialog(rootPane, "Usuario nao encontrado  " + Login.NOME + " !! ");
             txtUser.setText("");
             txtPwd.setText("");
         }
+        
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     public void setPrincipal(JFrame principal) {

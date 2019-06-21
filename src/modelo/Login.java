@@ -19,8 +19,10 @@ public class Login {
     @Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY) 
     private int id;
-    private static String usuario;
-    private static  String senha;
+    private String usuario;
+    private String senha;
+    public static String NOME;
+    public static String PWD;
 
     public Login() {
     }
@@ -28,24 +30,36 @@ public class Login {
     public Login(String usuario, String senha) {
         this.usuario = usuario;
         this.senha = senha;
+        Login.NOME = usuario;
+        Login.PWD = senha;
+       
     }
 
-    public static String getUsuario() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsuario() {
         return usuario;
     }
 
-    public static void setUsuario(String usuario) {
-        Login.usuario = usuario;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public static String getSenha() {
+    public String getSenha() {
         return senha;
     }
 
-    public static void setSenha(String senha) {
-        Login.senha = senha;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
-    
+
+
     
     
 }

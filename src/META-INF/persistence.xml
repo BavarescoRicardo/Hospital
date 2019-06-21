@@ -2,19 +2,19 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="persis" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <class>modelo.Doenca</class>
-    <class>modelo.Medicamento</class>
-    <class>modelo.Funcionario</class>
     <class>modelo.TipoFuncionario</class>
-    <class>modelo.Medico</class>
     <class>modelo.TipoQuarto</class>
-    <class>modelo.Paciente</class>
-    <class>modelo.Quarto</class>
+    <class>modelo.Doenca</class>
+    <class>modelo.Funcionario</class>
     <class>modelo.Leito</class>
     <class>modelo.Login</class>
-    <validation-mode>NONE</validation-mode>
+    <class>modelo.Medicamento</class>
+    <class>modelo.Quarto</class>
+    <class>modelo.Medico</class>
+    <class>modelo.Paciente</class>
+    <class>servico.RevEntity</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hibernateHospital?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hospitalHiberAuditavel?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="admin"/>

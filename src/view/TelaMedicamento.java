@@ -187,7 +187,7 @@ public class TelaMedicamento extends javax.swing.JInternalFrame {
             lista = dao.listar();
             dtm.setRowCount(0);
             for (Medicamento me : lista) {
-                dtm.insertRow(dtm.getRowCount(), new Object[]{me.getNome()});
+                dtm.insertRow(dtm.getRowCount(), new Object[]{me.getIdMedicamento(),me.getNome()});
             }
             JOptionPane.showMessageDialog(rootPane,"Medicamento inserido"); 
         }else

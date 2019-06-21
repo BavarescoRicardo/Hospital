@@ -20,7 +20,7 @@ import javax.persistence.Temporal;
  * @author Ricardo
  */
 
-@Entity
+//@Entity
 public class Prontuario {
     @Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY) 
