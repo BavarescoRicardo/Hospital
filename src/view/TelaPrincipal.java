@@ -122,7 +122,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnProntuario = new javax.swing.JButton();
         btnNovoPaciente = new javax.swing.JButton();
         btnQuarto = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -229,9 +229,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jPanel3.add(jButton8);
 
-        jButton6.setText(".");
-        jButton6.setEnabled(false);
-        jPanel3.add(jButton6);
+        btnProntuario.setText("Novo Prontuario");
+        btnProntuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProntuarioActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnProntuario);
 
         btnNovoPaciente.setText("Novo Paciente");
         btnNovoPaciente.addActionListener(new java.awt.event.ActionListener() {
@@ -370,6 +374,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnQuartoActionPerformed
 
+    private void btnProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProntuarioActionPerformed
+        TelaNovoProntuario novoProntuario = new TelaNovoProntuario();
+        novoProntuario.setVisible(true);
+        novoProntuario.setPainel(painelDesktop);
+        painelDesktop.add(novoProntuario);
+    }//GEN-LAST:event_btnProntuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -411,11 +422,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnListaPacient;
     private javax.swing.JButton btnMedicamento;
     private javax.swing.JButton btnNovoPaciente;
+    private javax.swing.JButton btnProntuario;
     private javax.swing.JButton btnQuarto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;

@@ -15,21 +15,23 @@ import modelo.Paciente;
  * @author blank
  */
 public class TelaListarPacient extends javax.swing.JInternalFrame {
+
     private PacienteDao dao = new PacienteDao();
     private DefaultTableModel dt;
+    private TelaNovoProntuario novoProntuario;
+
     /**
      * Creates new form TelaListarPacient
      */
-    
+
     public TelaListarPacient() {
         initComponents();
         dt = (DefaultTableModel) tabela.getModel();
-        
-        for (Paciente p : dao.listar()){
-            dt.insertRow(dt.getRowCount(), new Object []{p.getIdPaciente(),p.getNOME(),p.getDataNascimento().toString(),p.getCPF(),p.getEMAIL()});
+
+        for (Paciente p : dao.listar()) {
+            dt.insertRow(dt.getRowCount(), new Object[]{p.getIdPaciente(), p.getNOME(), p.getDataNascimento().toString(), p.getCPF(), p.getEMAIL()});
         }
-        
-        
+
     }
 
     /**
@@ -108,6 +110,11 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
 
         btnProntuario.setText("Prontuario");
         btnProntuario.setEnabled(false);
+        btnProntuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProntuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,51 +165,71 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    
-    private void attLista(){
+    public void prontuarioBtn() {
+        btnProntuario.setEnabled(true);
+
+    }
+
+    private void attLista() {
         dt = (DefaultTableModel) tabela.getModel();
         dt.setRowCount(0);
-        
-        for (Paciente p : dao.listar()){
-            dt.addRow(new Object[]{p.getIdPaciente(),p.getNOME(),p.getDataNascimento().toString(),p.getCPF(),p.getEMAIL()});
+
+        for (Paciente p : dao.listar()) {
+            dt.addRow(new Object[]{p.getIdPaciente(), p.getNOME(), p.getDataNascimento().toString(), p.getCPF(), p.getEMAIL()});
         }
     }
-    
+
+    public void setNovoProntuario(TelaNovoProntuario novoProntuario) {
+        this.novoProntuario = novoProntuario;
+    }
+
+
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-                //  conferir se uma lista esta selecionada
-        if(!tabela.getSelectionModel().isSelectionEmpty()){
+        //  conferir se uma lista esta selecionada
+        if (!tabela.getSelectionModel().isSelectionEmpty()) {
             // cria objeto medico
             int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
-            
+
             Paciente pac;
             pac = dao.getById(id);
             // remove do bd
             dao.remove(pac);
-            
-            
+
             // mensagem de sucesso
             JOptionPane.showMessageDialog(rootPane, "Paciente removido !");
-            
+
             // atualizar lista
-             attLista();
-        }else{
+            attLista();
+        } else {
             // mensagem de erro; ao nao selecionar a linha
             JOptionPane.showMessageDialog(rootPane, "Selecione um Paciente da tabela !");
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (!tabela.getSelectionModel().isSelectionEmpty()){
-            int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(),0).toString());
+        if (!tabela.getSelectionModel().isSelectionEmpty()) {
+            int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
             Paciente p = dao.getById(id);
-            p.setNOME(tabela.getValueAt(tabela.getSelectedRow(),1).toString());
-            p.setCPF(tabela.getValueAt(tabela.getSelectedRow(),3).toString());
-            p.setEMAIL(tabela.getValueAt(tabela.getSelectedRow(),4).toString());
+            p.setNOME(tabela.getValueAt(tabela.getSelectedRow(), 1).toString());
+            p.setCPF(tabela.getValueAt(tabela.getSelectedRow(), 3).toString());
+            p.setEMAIL(tabela.getValueAt(tabela.getSelectedRow(), 4).toString());
             dao.altera(p);
             JOptionPane.showMessageDialog(rootPane, "Alterado com sucesso !");
-        }else
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Selecione uma linha !");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProntuarioActionPerformed
+        if (!tabela.getSelectionModel().isSelectionEmpty()) {
+            String pacienteSelecionado = tabela.getValueAt(tabela.getSelectedRow(), 1).toString();
+            novoProntuario.setLbPaciente(pacienteSelecionado);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Escolha uma linha na tabela !");
+        }
+
+    }//GEN-LAST:event_btnProntuarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

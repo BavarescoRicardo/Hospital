@@ -58,6 +58,7 @@ public class TelaListarrMedico extends javax.swing.JInternalFrame {
         btnRemover = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnVersao = new javax.swing.JButton();
+        btnTudo = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
 
@@ -119,6 +120,13 @@ public class TelaListarrMedico extends javax.swing.JInternalFrame {
             }
         });
 
+        btnTudo.setText("Todos ");
+        btnTudo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTudoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,10 +140,12 @@ public class TelaListarrMedico extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTudo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28))))
         );
@@ -144,13 +154,14 @@ public class TelaListarrMedico extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTudo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -253,28 +264,23 @@ public class TelaListarrMedico extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, "Selecione uma linha da tabela !! ");
         }
 
-        /*
-        AuditQuery query = reader.createQuery()
-                .forRevisionsOfEntity(Medico.class, false, false);
-
-        
-        List<Object[]> listaRevisoes = reader.createQuery()
-                .forRevisionsOfEntity(Medico.class, false).getResultList();
-         
-        // filtro por autor da modificacao
-        // query.add(AuditEntity.property("username").eq("ricardo"));
-        //testes 
-        List<Object[]> listaVersionada = (List<Object[]>) query.getResultList();
-         */
-        //In this case we want the entity revision information object, which is the second object of the array.
-        // Medico userRevMedico = (Medico) obj;
 
     }//GEN-LAST:event_btnVersaoActionPerformed
+
+    private void btnTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTudoActionPerformed
+            TelaVersionaMedico versao = new TelaVersionaMedico();
+            versao.setVisible(true);
+            versao.setLocation(painel.getWidth() - versao.getWidth(), painel.getHeight() / 3 - versao.getHeight() / 3);
+            versao.todos();
+            painel.add(versao);
+
+    }//GEN-LAST:event_btnTudoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnRemover;
+    private javax.swing.JButton btnTudo;
     private javax.swing.JButton btnVersao;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jPanel1;

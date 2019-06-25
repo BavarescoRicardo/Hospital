@@ -37,7 +37,7 @@ public class TelaVersionaMedico extends javax.swing.JInternalFrame {
         dtm = (DefaultTableModel) tabela.getModel();
 
         em = Gerenciador.getInstancia().getEm();
-
+        auditReader = AuditReaderFactory.get(em);
     }
 
     private void atualizarTabela() {
@@ -45,9 +45,7 @@ public class TelaVersionaMedico extends javax.swing.JInternalFrame {
         reader = AuditReaderFactory.get(em);
         AuditQuery q = reader.createQuery().forRevisionsOfEntity(Medico.class, true, true);
         q.add(AuditEntity.id().eq(idMed));
-        List<Medico> audit = q.getResultList();
-
-        auditReader = AuditReaderFactory.get(em);
+        List<Medico> audit = q.getResultList();        
 
         RevEntity cRevEntity;
         String dia = "";
@@ -208,10 +206,33 @@ public class TelaVersionaMedico extends javax.swing.JInternalFrame {
                 dtm.addRow(new Object[]{m.getIdMedico(), "Excluido", m.getCRM(), m.getCPF(), m.getEMAIL(), m.getESPECIALIDADE(), r.getUsername(), dia});
         }
         
-
-
     }//GEN-LAST:event_btnTudoActionPerformed
 
+    public void todos(){
+        dtm.setRowCount(0);
+        
+        List listaMe = AuditReaderFactory.get(em)
+                                   .createQuery()
+                                   .forRevisionsOfEntity(Medico.class, true, true)
+                                   .getResultList();
+       
+        RevEntity r;
+        String dia,hora;
+        int tamLista;
+        for (tamLista = 0; tamLista < listaMe.size(); tamLista ++){
+            Medico m = (Medico) listaMe.get(tamLista);
+            
+            
+            r = auditReader.findRevision(RevEntity.class, tamLista+1);
+            hora = String.valueOf(r.getUtilD());
+            dia = hora.substring(0, 16);
+            if (m.getNOME() != null)
+                dtm.addRow(new Object[]{m.getIdMedico(), m.getNOME(), m.getCRM(), m.getCPF(), m.getEMAIL(), m.getESPECIALIDADE(), r.getUsername(), dia});
+            else
+                dtm.addRow(new Object[]{m.getIdMedico(), "Excluido", m.getCRM(), m.getCPF(), m.getEMAIL(), m.getESPECIALIDADE(), r.getUsername(), dia});
+        }
+    }
+    
     public void setIdMed(int idMed) {
         this.idMed = idMed;
         atualizarTabela();
