@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package servico;
 
 /**
@@ -10,7 +6,6 @@ package servico;
  * @author blank
  */
 import java.util.Date;
-import javax.persistence.Basic;
 import org.hibernate.envers.RevisionNumber;
 import org.hibernate.envers.RevisionTimestamp;
 import org.hibernate.envers.RevisionEntity;
@@ -18,8 +13,6 @@ import org.hibernate.envers.RevisionEntity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @RevisionEntity(ExambleListener.class)
