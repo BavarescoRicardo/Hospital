@@ -27,65 +27,73 @@ public class TelaPrincipal extends javax.swing.JFrame {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         JMenuItem menuSobre = new JMenuItem("Sobre");
-        JMenuItem menuFuncao = new JMenuItem("Funcao");       
+        JMenuItem menuFuncao = new JMenuItem("Funcao");
         JMenuItem menuGrid = new JMenuItem("Layout");
         JMenuItem menuAla = new JMenuItem("Tipo Quarto (ALA)");
-        
+        JMenuItem menuLogout = new JMenuItem("Fazer logoff");
+
         // Exibe a janela de login
-        
         TelaUser user = new TelaUser(this, rootPaneCheckingEnabled);
         user.setLocationRelativeTo(null);
         user.setPrincipal(this);
         user.setVisible(true);
-       
-        
+
         menuTelas.add(menuSobre);
         menuTelas.add(menuFuncao);
         menuTelas.add(menuGrid);
         menuTelas.add(menuAla);
-        
+        menuTelas.add(menuLogout);
         lblListar.setVisible(false);
         lblIncluir.setVisible(false);
-        
+
         menuSobre.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 TelaSobre sobre = new TelaSobre();
-                 sobre.setVisible(true);
+                TelaSobre sobre = new TelaSobre();
+                sobre.setVisible(true);
             }
         });
-        
-        
+
         menuFuncao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaNovaFuncao telaNovaFuncao = new TelaNovaFuncao();               
-                
+                TelaNovaFuncao telaNovaFuncao = new TelaNovaFuncao();
+
                 painelDesktop.repaint();
                 painelDesktop.add(telaNovaFuncao);
                 telaNovaFuncao.setVisible(true);
             }
         });
-        
-       menuGrid.addActionListener(new  ActionListener() {
+
+        menuGrid.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 TelaGridLayout telaGridLayout = new TelaGridLayout();
-                 telaGridLayout.setVisible(true);
+                TelaGridLayout telaGridLayout = new TelaGridLayout();
+                telaGridLayout.setVisible(true);
             }
         });
-       
-       menuAla.addActionListener(new ActionListener() {
+
+        menuAla.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaNovaAla telaNovaAla = new TelaNovaAla();               
-                
+                TelaNovaAla telaNovaAla = new TelaNovaAla();
+
                 painelDesktop.repaint();
                 painelDesktop.add(telaNovaAla);
                 telaNovaAla.setVisible(true);
             }
         });
-        
+
+        menuLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                user.setLocationRelativeTo(null);
+                
+                user.setVisible(true);
+            }
+        });
+
     }
 
     /**
@@ -306,8 +314,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnDoencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoencaActionPerformed
         TelaDoenca telaDoenca = new TelaDoenca();
-        if(painelDesktop.getAllFrames() != null)
-                   painelDesktop.removeAll();
+        if (painelDesktop.getAllFrames() != null) {
+            painelDesktop.removeAll();
+        }
         painelDesktop.repaint();
         painelDesktop.add(telaDoenca);
         telaDoenca.setVisible(true);
@@ -315,19 +324,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicamentoActionPerformed
         TelaMedicamento telaMedicamento = new TelaMedicamento();
-        if(painelDesktop.getAllFrames() != null)
-                   painelDesktop.removeAll();
+        if (painelDesktop.getAllFrames() != null) {
+            painelDesktop.removeAll();
+        }
         painelDesktop.repaint();
         painelDesktop.add(telaMedicamento);
         telaMedicamento.setVisible(true);
-        
+
     }//GEN-LAST:event_btnMedicamentoActionPerformed
 
     private void btnFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionarioActionPerformed
         TelaFuncionario telaFuncionario = new TelaFuncionario();
         telaFuncionario.setPainel(painelDesktop);
-        if(painelDesktop.getAllFrames() != null)
-                painelDesktop.removeAll();
+        if (painelDesktop.getAllFrames() != null) {
+            painelDesktop.removeAll();
+        }
         painelDesktop.repaint();
         painelDesktop.add(telaFuncionario);
         telaFuncionario.setVisible(true);
@@ -348,7 +359,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         TelaListarrMedico telaMedico = new TelaListarrMedico();
         telaMedico.setPainel(painelDesktop);
-        
+
         telaMedico.setVisible(true);
         painelDesktop.add(telaMedico);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -366,12 +377,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnListaPacientActionPerformed
 
     private void btnQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuartoActionPerformed
-        
+
         TelaQuarto telaQuarto = new TelaQuarto();
         telaQuarto.setPainelDktp(painelDesktop);
         telaQuarto.setVisible(true);
         painelDesktop.add(telaQuarto);
-        
+
     }//GEN-LAST:event_btnQuartoActionPerformed
 
     private void btnProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProntuarioActionPerformed
