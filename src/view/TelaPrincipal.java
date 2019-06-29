@@ -372,6 +372,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnListaPacientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaPacientActionPerformed
         TelaListarPacient telaListarPacient = new TelaListarPacient();
+        telaListarPacient.setPainel(painelDesktop);
         telaListarPacient.setVisible(true);
         painelDesktop.add(telaListarPacient);
     }//GEN-LAST:event_btnListaPacientActionPerformed

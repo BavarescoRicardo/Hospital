@@ -205,7 +205,7 @@ public class TelaDoenca extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane,"Doença inserida"); 
             
         }else
-            JOptionPane.showMessageDialog(rootPane,"Iforme o nome da doença !");
+            JOptionPane.showMessageDialog(rootPane,"Informe o nome da doença !");
         
     }//GEN-LAST:event_btnInserirActionPerformed
 
@@ -217,14 +217,7 @@ public class TelaDoenca extends javax.swing.JInternalFrame {
         if (!tabela.getSelectionModel().isSelectionEmpty()) {
             DoencaDao dao = new DoencaDao();
             Doenca doenca = new Doenca();
-
-            listaDoenca = dao.listar();
-
-            for (Doenca doen : listaDoenca) {
-                if (doen.getNome().equals(dtm.getValueAt(tabela.getSelectedRow(), 0))) {
-                    doenca = doen;
-                }
-            }
+            doenca = dao.getById(Integer.parseInt(dtm.getValueAt(tabela.getSelectedRow(), 0).toString()));
 
             dao.remove(doenca);
 
@@ -232,7 +225,7 @@ public class TelaDoenca extends javax.swing.JInternalFrame {
             listaDoenca = dao.listar();
             dtm.setRowCount(0);
             for (Doenca d : listaDoenca) {
-                dtm.insertRow(dtm.getRowCount(), new Object[]{d.getNome()});
+                dtm.insertRow(dtm.getRowCount(), new Object[]{d.getIdDoenca(),d.getNome()});
             }
 
         }else

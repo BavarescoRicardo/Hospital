@@ -27,11 +27,13 @@ public class TelaQuarto extends javax.swing.JInternalFrame {
     private TipoQuartoDao tipoQuartoDao = new TipoQuartoDao();
     private QuartoDao quartoDao = new QuartoDao();
     private DefaultTableModel dtm;
+    private TelaNovoProntuario telaProntuario;
+    private boolean prontuario;
 
     public TelaQuarto() {
         initComponents();
         dtm = (DefaultTableModel) tabela.getModel();
-
+        prontuario = false;
         DefaultComboBoxModel comboModel = (DefaultComboBoxModel) comboAla.getModel();
         //removendo todos os elementos do combo
         comboModel.removeAllElements();
@@ -118,7 +120,7 @@ public class TelaQuarto extends javax.swing.JInternalFrame {
             }
         });
 
-        btnNovoLeito.setText("Novo Leito");
+        btnNovoLeito.setText("Leito");
         btnNovoLeito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoLeitoActionPerformed(evt);
@@ -209,12 +211,27 @@ public class TelaQuarto extends javax.swing.JInternalFrame {
             // passa o id do quarto para a tela de leitos 
             leito.setIdQuarto(Integer.parseInt(dtm.getValueAt(tabela.getSelectedRow(), 0).toString()));
             leito.setVisible(true);
-            leito.setLocation(painelDktp.getWidth()/2 - leito.getWidth()/2,
+            leito.setLocation(painelDktp.getWidth()/2 - leito.getWidth()/6,
             painelDktp.getHeight()/2 - leito.getHeight()/2);
+            
+            // passa a tela prontuario e uma variavel boleana indicando que o prontuario esta aberto
+            if (prontuario){
+                leito.setTelaProntuario(telaProntuario);
+                leito.setProntuario(true);
+            }
+            
             painelDktp.add(leito);
         }else
             JOptionPane.showMessageDialog(rootPane, "Selecione um quarto da tabela !");
     }//GEN-LAST:event_btnNovoLeitoActionPerformed
+
+    public void setProntuario(TelaNovoProntuario prontuario) {
+        this.telaProntuario = prontuario;
+    }
+
+    public void setProntuario(boolean prontuario) {
+        this.prontuario = prontuario;
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (!txtQuarto.equals("")) {

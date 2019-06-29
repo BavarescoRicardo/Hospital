@@ -28,10 +28,13 @@ public class TelaLeito extends javax.swing.JInternalFrame {
     private LeitoDao leitoDao = new LeitoDao();
     private DefaultTableModel dtm;
     private int idQuarto;
+    private TelaNovoProntuario telaProntuario;
+    private boolean prontuario;
     
     public TelaLeito() {
         initComponents();
         dtm = (DefaultTableModel) tabela.getModel();
+        prontuario = false;
         
        // attTabela();
         
@@ -72,6 +75,7 @@ public class TelaLeito extends javax.swing.JInternalFrame {
         btnVoltar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+        btnProntuario = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
 
@@ -145,6 +149,14 @@ public class TelaLeito extends javax.swing.JInternalFrame {
             tabela.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        btnProntuario.setText("Prontuario");
+        btnProntuario.setEnabled(false);
+        btnProntuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProntuarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -153,7 +165,9 @@ public class TelaLeito extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(btnProntuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
@@ -166,8 +180,11 @@ public class TelaLeito extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -206,8 +223,26 @@ public class TelaLeito extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, "Informe o leito e o quarto");
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProntuarioActionPerformed
+        // String nome do leito selecionado da tabela
+        telaProntuario.setLbLeito(dtm.getValueAt(tabela.getSelectedRow(),1).toString());
+        // String nome do leito selecionado da tabela
+        telaProntuario.setLbIdLeito(dtm.getValueAt(tabela.getSelectedRow(),0).toString());
+        this.setVisible(false);
+    }//GEN-LAST:event_btnProntuarioActionPerformed
+
+    public void setTelaProntuario(TelaNovoProntuario telaProntuario) {
+        btnProntuario.setEnabled(true);
+        this.telaProntuario = telaProntuario;
+    }
+
+    public void setProntuario(boolean prontuario) {
+        this.prontuario = prontuario;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnProntuario;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

@@ -42,10 +42,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" pref="568" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Component id="btnVoltar" min="-2" pref="100" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btnDetalhes" pref="100" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnProntuario" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnRemover" min="-2" pref="100" max="-2" attributes="0"/>
@@ -66,8 +68,9 @@
                       <Component id="btnRemover" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="btnEditar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="btnProntuario" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="btnDetalhes" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -158,6 +161,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProntuarioActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnDetalhes">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Detalhes"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDetalhesActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

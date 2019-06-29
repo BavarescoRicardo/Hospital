@@ -199,21 +199,15 @@ public class TelaMedicamento extends javax.swing.JInternalFrame {
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         if (!tabela.getSelectionModel().isSelectionEmpty()) {
             MedicamentoDao dao = new MedicamentoDao();
-            Medicamento m = new Medicamento();
-
-            for (Medicamento medicamento : dao.listar()) {
-                if (medicamento.getNome().equals(dtm.getValueAt(tabela.getSelectedRow(), 0))) {
-                    m = medicamento;
-                }
-            }
-
-            dao.remove(m);
+            
+            Medicamento med = dao.getById(Integer.parseInt(dtm.getValueAt(tabela.getSelectedRow(), 0).toString()));
+            dao.remove(med);
 
             //atualizar tabela 
             lista = dao.listar();
             dtm.setRowCount(0);
             for (Medicamento me : lista) {
-                dtm.insertRow(dtm.getRowCount(), new Object[]{me.getNome()});
+                dtm.insertRow(dtm.getRowCount(), new Object[]{me.getIdMedicamento(),me.getNome()});
             }
 
         }else

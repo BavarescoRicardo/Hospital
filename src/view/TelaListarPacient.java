@@ -6,6 +6,7 @@
 package view;
 
 import dao.PacienteDao;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Paciente;
@@ -19,6 +20,7 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
     private PacienteDao dao = new PacienteDao();
     private DefaultTableModel dt;
     private TelaNovoProntuario novoProntuario;
+    private JDesktopPane painel;
 
     /**
      * Creates new form TelaListarPacient
@@ -50,6 +52,7 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
         btnRemover = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnProntuario = new javax.swing.JButton();
+        btnDetalhes = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
 
@@ -116,14 +119,23 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
             }
         });
 
+        btnDetalhes.setText("Detalhes");
+        btnDetalhes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetalhesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDetalhes, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,8 +153,9 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDetalhes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -165,6 +178,10 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    public void setPainel(JDesktopPane painel) {
+        this.painel = painel;
+    }
+    
     public void prontuarioBtn() {
         btnProntuario.setEnabled(true);
 
@@ -224,6 +241,7 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
         if (!tabela.getSelectionModel().isSelectionEmpty()) {
             String pacienteSelecionado = tabela.getValueAt(tabela.getSelectedRow(), 1).toString();
             novoProntuario.setLbPaciente(pacienteSelecionado);
+            novoProntuario.setLbIdPaciente(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
             this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(rootPane, "Escolha uma linha na tabela !");
@@ -231,8 +249,26 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnProntuarioActionPerformed
 
+    private void btnDetalhesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesActionPerformed
+        if (!tabela.getSelectionModel().isSelectionEmpty()){
+            // pega o id do paciente selecionado
+            int idPaciente = Integer.parseInt(dt.getValueAt(tabela.getSelectedRow(),0).toString());
+            
+            TelaDetalhesProntuario detalhe = new TelaDetalhesProntuario();
+            detalhe.setVisible(true);
+            detalhe.setIdPaciente(idPaciente);
+            detalhe.attTabela();
+            detalhe.setLocation(painel.getWidth()/2 - detalhe.getWidth()/6,
+            painel.getHeight()/2 - detalhe.getHeight()/2);
+            painel.add(detalhe);
+            
+        }else
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma linha da tabela !");
+    }//GEN-LAST:event_btnDetalhesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDetalhes;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnProntuario;
     private javax.swing.JButton btnRemover;

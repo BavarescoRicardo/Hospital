@@ -5,11 +5,18 @@
  */
 package view;
 
+import dao.LeitoDao;
 import dao.MedicoDao;
+import dao.PacienteDao;
+import dao.ProntuarioDao;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import modelo.Leito;
 import modelo.Medico;
+import modelo.Paciente;
+import modelo.Prontuario;
 import modelo.TipoFuncionario;
 
 /**
@@ -23,15 +30,9 @@ public class TelaNovoProntuario extends javax.swing.JInternalFrame {
 
     public TelaNovoProntuario() {
         initComponents();
-
-        // comboBox modificado
-        DefaultComboBoxModel comboModel = (DefaultComboBoxModel) comboMedico.getModel();
-        //removendo todos os elementos do combo
-        comboModel.removeAllElements();
-
-        for (Medico medico : medicoDao.listar()) {
-            comboModel.addElement(medico);
-        }
+        lbIdLeito.setText("0");
+        lbIdMedico.setText("0");
+        lbIdPaciente.setText("0");
     }
 
     /**
@@ -46,12 +47,16 @@ public class TelaNovoProntuario extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnLeito = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        comboMedico = new javax.swing.JComboBox<>();
+        btnInserir = new javax.swing.JButton();
         lbPaciente = new javax.swing.JLabel();
         lbLeito = new javax.swing.JLabel();
+        lbIdPaciente = new javax.swing.JLabel();
+        lbIdLeito = new javax.swing.JLabel();
+        btnMedico = new javax.swing.JButton();
+        lbIdMedico = new javax.swing.JLabel();
+        lbMedico = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
 
@@ -66,10 +71,10 @@ public class TelaNovoProntuario extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Escolher leito");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnLeito.setText("Escolher leito");
+        btnLeito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnLeitoActionPerformed(evt);
             }
         });
 
@@ -80,9 +85,12 @@ public class TelaNovoProntuario extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton5.setText("Inserir");
-
-        comboMedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolher medico " }));
+        btnInserir.setText("Inserir");
+        btnInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirActionPerformed(evt);
+            }
+        });
 
         lbPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbPaciente.setText("Nenhum paciente selecionado ");
@@ -90,18 +98,31 @@ public class TelaNovoProntuario extends javax.swing.JInternalFrame {
         lbLeito.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbLeito.setText("Nenhum leito selecionado");
 
+        lbIdPaciente.setText("0");
+
+        lbIdLeito.setText("0");
+
+        btnMedico.setText("Escolher Medico");
+        btnMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMedicoActionPerformed(evt);
+            }
+        });
+
+        lbIdMedico.setText("0");
+
+        lbMedico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbMedico.setText("Nenhum medico selecionado");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(279, 279, 279)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -110,10 +131,18 @@ public class TelaNovoProntuario extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbLeito, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(209, Short.MAX_VALUE))
+                            .addComponent(btnLeito, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbIdMedico)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(lbIdLeito, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbIdPaciente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(52, 52, 52))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,17 +152,25 @@ public class TelaNovoProntuario extends javax.swing.JInternalFrame {
                 .addGap(45, 45, 45)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbIdPaciente))
                 .addGap(27, 27, 27)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(lbLeito, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLeito, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(comboMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbLeito, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbIdLeito))
+                .addGap(28, 28, 28)
+                .addComponent(btnMedico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbIdMedico))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
 
@@ -151,9 +188,16 @@ public class TelaNovoProntuario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnLeitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeitoActionPerformed
+        TelaQuarto telaQuarto = new TelaQuarto();
+        telaQuarto.setPainelDktp(painel);
+        telaQuarto.setProntuario(true);
+        telaQuarto.setProntuario(this);
+        telaQuarto.setVisible(true);
+        telaQuarto.setLocation(painel.getWidth() / 2 - telaQuarto.getWidth() / 2,
+        painel.getHeight() / 2 - telaQuarto.getHeight() / 2);
+        painel.add(telaQuarto);
+    }//GEN-LAST:event_btnLeitoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.setVisible(false);
@@ -163,6 +207,26 @@ public class TelaNovoProntuario extends javax.swing.JInternalFrame {
         this.lbPaciente.setText(lbText);
     }
     
+    public void setLblMedico(String nomeMedico){
+        lbMedico.setText(nomeMedico);
+    }
+    
+    public void setLbIdPaciente(String idPaciente){
+        lbIdPaciente.setText(idPaciente);
+    }
+        
+    public void setLbIdMedico(String idM){
+        lbIdMedico.setText(idM);
+    }
+    
+        
+    public void setLbLeito(String leito){
+        lbLeito.setText(leito);
+    }
+        
+    public void setLbIdLeito(String idLeito){
+        lbIdLeito.setText(idLeito);
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         TelaListarPacient listaPaciente = new TelaListarPacient();
         listaPaciente.setVisible(true);
@@ -173,20 +237,64 @@ public class TelaNovoProntuario extends javax.swing.JInternalFrame {
         painel.add(listaPaciente);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicoActionPerformed
+        TelaListarrMedico telaListarrMedico = new TelaListarrMedico();
+        telaListarrMedico.setVisible(true);
+        telaListarrMedico.setNovoProntuario(this);
+        telaListarrMedico.ativarBtn();
+        telaListarrMedico.setLocation(painel.getWidth() / 2 - telaListarrMedico.getWidth() / 2,
+        painel.getHeight() / 2 - telaListarrMedico.getHeight() / 2);
+        painel.add(telaListarrMedico);
+        
+    }//GEN-LAST:event_btnMedicoActionPerformed
+
+    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+        ProntuarioDao protuarioDao = new ProntuarioDao();
+        PacienteDao pacienteDao = new PacienteDao();
+        MedicoDao medicoDao = new MedicoDao();
+        LeitoDao leitoDao = new LeitoDao();
+        
+        // conferir se todos os campos foram selecionados
+        int idP = Integer.parseInt(lbIdPaciente.getText());
+        int idL = Integer.parseInt(lbIdLeito.getText());
+        int idM = Integer.parseInt(lbIdMedico.getText());
+        if ( idP  > 0 & idL > 0 && idM > 0 ){ 
+            Paciente paciente = pacienteDao.getById(idP);
+            Leito leito = leitoDao.getById(idL);
+            Medico medico = medicoDao.getById(idM);
+            // data d entrada é a data atual 
+            java.util.Date dataAtual = new java.util.Date();
+            java.sql.Date dataEntrada = new java.sql.Date(dataAtual.getTime()); 
+            
+            Prontuario prontuario = new Prontuario(paciente, leito, medico, dataEntrada);
+            protuarioDao.salvar(prontuario);
+            
+            JOptionPane.showMessageDialog(rootPane,"Novo prontuario salvo !");
+            
+        }else
+            JOptionPane.showMessageDialog(rootPane, "Selecione todos os campos !!");
+        
+        
+    }//GEN-LAST:event_btnInserirActionPerformed
+
     public void setPainel(JDesktopPane painel) {
         this.painel = painel;
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboMedico;
+    private javax.swing.JButton btnInserir;
+    private javax.swing.JButton btnLeito;
+    private javax.swing.JButton btnMedico;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbIdLeito;
+    private javax.swing.JLabel lbIdMedico;
+    private javax.swing.JLabel lbIdPaciente;
     private javax.swing.JLabel lbLeito;
+    private javax.swing.JLabel lbMedico;
     private javax.swing.JLabel lbPaciente;
     // End of variables declaration//GEN-END:variables
 }

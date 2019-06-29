@@ -13,6 +13,7 @@
     <class>modelo.Medico</class>
     <class>modelo.Paciente</class>
     <class>servico.RevEntity</class>
+    <class>modelo.Prontuario</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hospitalHiberAuditavel?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

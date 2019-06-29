@@ -20,7 +20,7 @@ import javax.persistence.Temporal;
  * @author Ricardo
  */
 
-//@Entity
+@Entity
 public class Prontuario {
     @Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY) 
@@ -35,7 +35,7 @@ public class Prontuario {
     private java.sql.Date dataEntrada;
     private java.sql.Date dataAlta;
 
-    public int getProntuario() {
+    public int getIdProntuario() {
         return idProntuario;
     }
 
@@ -87,8 +87,7 @@ public class Prontuario {
     public Prontuario() {
     }
 
-    public Prontuario(int prontuario, Paciente paciente, Leito leito, Medico medico, Date dataEntrada) {
-        this.idProntuario = prontuario;
+    public Prontuario(Paciente paciente, Leito leito, Medico medico, Date dataEntrada) {
         this.paciente = paciente;
         this.leito = leito;
         this.medico = medico;
