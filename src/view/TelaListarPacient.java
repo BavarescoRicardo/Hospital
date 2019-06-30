@@ -38,7 +38,7 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
 
     }
     public void mudarNomeBtn(){
-        this.btnDetalhes.setName("Diagnostico");
+        this.btnDetalhes.setText("Diagnostico");
     }
     /**
      * This method is called from within the constructor to initialize the form.

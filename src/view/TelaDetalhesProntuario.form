@@ -141,11 +141,13 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Alta"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAltaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnDiagnostico">
           <Properties>
             <Property name="text" type="java.lang.String" value="Diagnostico"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDiagnosticoActionPerformed"/>

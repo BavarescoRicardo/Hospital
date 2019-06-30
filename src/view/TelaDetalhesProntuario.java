@@ -39,6 +39,7 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
     }
 
     public void attTabela() {
+        
         dtm = (DefaultTableModel) tabela.getModel();
 
         for (Prontuario prontuario : prontuarioDao.listar()) {
@@ -46,6 +47,10 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
                 dtm.addRow(new Object[]{prontuario.getIdProntuario(), prontuario.getPaciente().getNOME(), prontuario.getMedico().getNOME(), prontuario.getLeito().getDescricao(), prontuario.getDataEntrada(), prontuario.getDataAlta()});
             }
         }
+    }
+    
+    public void zerarTabela(){
+        dtm.setRowCount(0);
     }
 
     /**
@@ -109,9 +114,13 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
         }
 
         btnAlta.setText("Alta");
+        btnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaActionPerformed(evt);
+            }
+        });
 
         btnDiagnostico.setText("Diagnostico");
-        btnDiagnostico.setEnabled(false);
         btnDiagnostico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDiagnosticoActionPerformed(evt);
@@ -168,11 +177,13 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    
     private void btnDiagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosticoActionPerformed
+        String idProntuario = dtm.getValueAt(0, 0).toString();
         if (diagnostico) {
             if (dtm.getRowCount() > 0){
-                    String idProntuario = dtm.getValueAt(tabela.getSelectedRow(), 0).toString();
-                    String dataE = dtm.getValueAt(tabela.getSelectedRow(), 4).toString();
+                    
+                    String dataE = dtm.getValueAt(0, 4).toString();
                     telaDiagnostico.defineProntuario(dataE, idProntuario);
                     JOptionPane.showMessageDialog(rootPane, "Prontuario selecionado !");
                     this.setVisible(false);
@@ -181,11 +192,20 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
         } else {
             
                 TelaExibirDiagnostico telaExibeD = new TelaExibirDiagnostico();
+                telaExibeD.setIdProntuario(Integer.parseInt(idProntuario));
+                telaExibeD.attTabela();
                 telaExibeD.setVisible(true);
                 painel.add(telaExibeD);
             
         }
     }//GEN-LAST:event_btnDiagnosticoActionPerformed
+
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
+        DataAlta telaCalendario = new DataAlta();
+        telaCalendario.setTela(this);
+        telaCalendario.setIdProntuario(Integer.parseInt(dtm.getValueAt(0, 0).toString()));
+        telaCalendario.setVisible(true);
+    }//GEN-LAST:event_btnAltaActionPerformed
 
     public void setIdPaciente(int idP) {
         this.idPaciente = idP;

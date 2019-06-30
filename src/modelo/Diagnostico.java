@@ -21,6 +21,7 @@ public class Diagnostico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idDiagnostico;
+    
     @ManyToOne
     private Doenca doenca;
     @ManyToOne
@@ -32,6 +33,11 @@ public class Diagnostico {
         this.prontuario = prontuario;
         this.STATUS = STATUS;
     }
+
+    public Diagnostico() {
+    }
+    
+    
 
     public int getIdDiagnostico() {
         return idDiagnostico;

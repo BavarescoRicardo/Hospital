@@ -33,24 +33,20 @@ public class DiagnosticoDao {
         ProntuarioDao prontuarioDao = new ProntuarioDao();
         Prontuario prontuario;
 
-        for (Prontuario p : prontuarioDao.listar()) {
-            if (p.getIdProntuario() == d.getProntuario().getIdProntuario()) {
+      /*
+        for (Diagnostico diagnostico : this.listar()) {
+            if (diagnostico.getProntuario().getIdProntuario() == d.getProntuario().getIdProntuario()) {
                 existente = true;
-                prontuario = d.getProntuario();
+                diagnostico.setDoenca(d.getDoenca());
+                diagnostico.setSTATUS(d.getSTATUS());
+                
+                em.getTransaction().begin();
+                em.merge(diagnostico);
+                em.getTransaction().commit();
 
-                for (Diagnostico diagnostico : this.listar()) {
-                    if (diagnostico.getProntuario().getIdProntuario() == prontuario.getIdProntuario()) {
-                        diagnostico.setDoenca(d.getDoenca());
-                        diagnostico.setSTATUS(d.getSTATUS());
-
-                        em.getTransaction().begin();
-                        em.merge(diagnostico);
-                        em.getTransaction().commit();
-                        break;
-                    }
-                }
             }
-        }
+        }*/
+
         if (!existente) {
             em.getTransaction().begin();
             em.persist(d);

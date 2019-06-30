@@ -215,9 +215,9 @@ public class TelaDiagnostico extends javax.swing.JInternalFrame {
         int idProntuario = Integer.parseInt(lblIdProntuario.getText().toString());
         String combo;
         if (comboStatus.getSelectedItem().toString().equals("Solucionado"))
-            combo = "a";
-        else
             combo = "s";
+        else
+            combo = "n";
         if (idDoenca > 0 && idProntuario > 0){
             // Instancia os objetos pelos id marcados na label
             Doenca doenca = doencaDao.getById(idDoenca);
