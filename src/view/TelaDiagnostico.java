@@ -5,7 +5,14 @@
  */
 package view;
 
+import dao.DiagnosticoDao;
+import dao.DoencaDao;
+import dao.ProntuarioDao;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
+import modelo.Diagnostico;
+import modelo.Doenca;
+import modelo.Prontuario;
 
 /**
  *
@@ -31,12 +38,13 @@ public class TelaDiagnostico extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         btnVoltar = new javax.swing.JButton();
         btnInserir = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnProntuario = new javax.swing.JButton();
+        btnDoenca = new javax.swing.JButton();
         lblProntuario = new javax.swing.JLabel();
         lblDoenca = new javax.swing.JLabel();
         lblIdProntuario = new javax.swing.JLabel();
         lblIdDoenca = new javax.swing.JLabel();
+        comboStatus = new javax.swing.JComboBox<>();
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
 
@@ -48,15 +56,25 @@ public class TelaDiagnostico extends javax.swing.JInternalFrame {
         });
 
         btnInserir.setText("Inserir");
-
-        jButton2.setText("Selecionar Prontuario");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnInserir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnInserirActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Selecionar Doença");
+        btnProntuario.setText("Selecionar Prontuario");
+        btnProntuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProntuarioActionPerformed(evt);
+            }
+        });
+
+        btnDoenca.setText("Selecionar Doença");
+        btnDoenca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoencaActionPerformed(evt);
+            }
+        });
 
         lblProntuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblProntuario.setText("Nenhum");
@@ -68,58 +86,67 @@ public class TelaDiagnostico extends javax.swing.JInternalFrame {
 
         lblIdDoenca.setText("0");
 
+        comboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Não Solucionado", "Solucionado", " " }));
+        comboStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboStatusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(lblProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblIdProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIdProntuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblIdDoenca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(57, 57, 57))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(lblDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                .addComponent(lblIdDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblIdProntuario))
-                .addGap(64, 64, 64)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblIdDoenca)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(29, 29, 29)
+                .addComponent(btnDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIdDoenca))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -141,9 +168,67 @@ public class TelaDiagnostico extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    public void defineProntuario(String dataEntrada, String idProntuario){
+        lblProntuario.setText(dataEntrada);
+        lblIdProntuario.setText(idProntuario);
+    }
+    
+    public void defineDoenca(String doenca, String idDoenca){
+        lblDoenca.setText(doenca);
+        lblIdDoenca.setText(idDoenca);
+    }
+    
+    private void btnProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProntuarioActionPerformed
+        TelaListarPacient telaPaciente = new TelaListarPacient();
+        telaPaciente.setVisible(true);
+        telaPaciente.mudarNomeBtn();
+        telaPaciente.setPainel(painel);
+        telaPaciente.setDiagnostico(true);
+        telaPaciente.setTelaDiagnostico(this);
+        telaPaciente.setLocation(painel.getWidth() / 2 - telaPaciente.getWidth() / 2,
+        painel.getHeight() / 2 - telaPaciente.getHeight() / 2);
+        painel.add(telaPaciente);
+    }//GEN-LAST:event_btnProntuarioActionPerformed
+
+    private void btnDoencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoencaActionPerformed
+        
+        TelaDoenca telaDoenca = new TelaDoenca();
+        telaDoenca.setTelaDiagnostico(this);
+        telaDoenca.habilitarBtn();
+        telaDoenca.setVisible(true);
+        telaDoenca.setLocation(painel.getWidth() / 2 - telaDoenca.getWidth() / 2,
+        painel.getHeight() / 2 - telaDoenca.getHeight() / 2);
+        painel.add(telaDoenca);
+        
+    }//GEN-LAST:event_btnDoencaActionPerformed
+
+    private void comboStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboStatusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_comboStatusActionPerformed
+
+    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+        DoencaDao doencaDao = new DoencaDao();
+        ProntuarioDao prontuarioDao = new ProntuarioDao();
+        DiagnosticoDao diagnosticoDao = new DiagnosticoDao();
+        
+        int idDoenca = Integer.parseInt(lblIdDoenca.getText().toString());
+        int idProntuario = Integer.parseInt(lblIdProntuario.getText().toString());
+        String combo;
+        if (comboStatus.getSelectedItem().toString().equals("Solucionado"))
+            combo = "a";
+        else
+            combo = "s";
+        if (idDoenca > 0 && idProntuario > 0){
+            // Instancia os objetos pelos id marcados na label
+            Doenca doenca = doencaDao.getById(idDoenca);
+            Prontuario prontuario = prontuarioDao.getById(idProntuario);
+            
+            Diagnostico diagnostico = new Diagnostico(doenca, prontuario, combo);
+            diagnosticoDao.inserir(diagnostico);
+            JOptionPane.showMessageDialog(rootPane, "Diagnostico inserido");
+        }else
+            JOptionPane.showMessageDialog(rootPane, "Indique todos os valores acima !");
+    }//GEN-LAST:event_btnInserirActionPerformed
 
     public void setPainel(JDesktopPane painel) {
         this.painel = painel;
@@ -151,10 +236,11 @@ public class TelaDiagnostico extends javax.swing.JInternalFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDoenca;
     private javax.swing.JButton btnInserir;
+    private javax.swing.JButton btnProntuario;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> comboStatus;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblDoenca;
     private javax.swing.JLabel lblIdDoenca;

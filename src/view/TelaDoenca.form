@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-      <Color blue="c8" green="d1" red="ec" type="rgb"/>
+      <Color blue="e5" green="e5" red="e5" type="rgb"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -24,16 +24,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -65,20 +62,23 @@
                           <Component id="btnVoltar" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="campoDoenca" min="-2" pref="282" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="btnEditar" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnRemover" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnDiagnostico" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace pref="18" max="32767" attributes="0"/>
                           <Component id="btnInserir" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="campoDoenca" min="-2" pref="282" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -90,16 +90,18 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="campoDoenca" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="btnInserir" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnInserir" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="btnVoltar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnVoltar" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                          <Component id="btnRemover" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="btnDiagnostico" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="btnRemover" alignment="1" max="32767" attributes="0"/>
-                      <Component id="btnEditar" alignment="1" max="32767" attributes="0"/>
+                      <Component id="btnEditar" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -181,6 +183,15 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnDiagnostico">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Diagnostico"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDiagnosticoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

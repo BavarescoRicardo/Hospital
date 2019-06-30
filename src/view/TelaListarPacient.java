@@ -21,6 +21,8 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
     private DefaultTableModel dt;
     private TelaNovoProntuario novoProntuario;
     private JDesktopPane painel;
+    private boolean diagnostico;
+    private TelaDiagnostico telaDiagnostico = new TelaDiagnostico();
 
     /**
      * Creates new form TelaListarPacient
@@ -35,7 +37,9 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
         }
 
     }
-
+    public void mudarNomeBtn(){
+        this.btnDetalhes.setName("Diagnostico");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,13 +153,14 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnDetalhes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,6 +183,14 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    public void setDiagnostico(boolean diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    public void setTelaDiagnostico(TelaDiagnostico telaDiagnostico) {
+        this.telaDiagnostico = telaDiagnostico;
+    }
+    
     public void setPainel(JDesktopPane painel) {
         this.painel = painel;
     }
@@ -255,11 +268,19 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
             int idPaciente = Integer.parseInt(dt.getValueAt(tabela.getSelectedRow(),0).toString());
             
             TelaDetalhesProntuario detalhe = new TelaDetalhesProntuario();
+            detalhe.setPainel(painel);
             detalhe.setVisible(true);
+            
+            // Verifica se o usuario iniciou na tela diagnostico
+            if (diagnostico){
+                detalhe.setDiagnostico(true);
+                detalhe.setTelaDiagnostico(telaDiagnostico);
+                detalhe.setLocation(painel.getWidth() - detalhe.getWidth(), painel.getHeight()/2 - detalhe.getHeight()/2);
+            }else
+                detalhe.setLocation(painel.getWidth()/2 - detalhe.getWidth()/6, painel.getHeight()/2 - detalhe.getHeight()/2);
+            
             detalhe.setIdPaciente(idPaciente);
             detalhe.attTabela();
-            detalhe.setLocation(painel.getWidth()/2 - detalhe.getWidth()/6,
-            painel.getHeight()/2 - detalhe.getHeight()/2);
             painel.add(detalhe);
             
         }else

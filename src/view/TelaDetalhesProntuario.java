@@ -6,6 +6,7 @@
 package view;
 
 import dao.ProntuarioDao;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Prontuario;
@@ -19,19 +20,31 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
     private int idPaciente;
     private ProntuarioDao prontuarioDao = new ProntuarioDao();
     private DefaultTableModel dtm;
-    
-    
+    private JDesktopPane painel;
+    private boolean diagnostico;
+    private TelaDiagnostico telaDiagnostico = new TelaDiagnostico();
+
     public TelaDetalhesProntuario() {
         initComponents();
-        
-        
+
     }
-    public void attTabela(){
+
+    public void setDiagnostico(boolean diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    public void setTelaDiagnostico(TelaDiagnostico telaDiagnostico) {
+        this.btnDiagnostico.setEnabled(true);
+        this.telaDiagnostico = telaDiagnostico;
+    }
+
+    public void attTabela() {
         dtm = (DefaultTableModel) tabela.getModel();
-        
-        for (Prontuario prontuario : prontuarioDao.listar()){
-            if (prontuario.getPaciente().getIdPaciente() == idPaciente)
-                dtm.addRow(new Object[]{prontuario.getIdProntuario(),prontuario.getPaciente().getNOME(),prontuario.getMedico().getNOME(),prontuario.getLeito().getDescricao(),prontuario.getDataEntrada(),prontuario.getDataAlta()});
+
+        for (Prontuario prontuario : prontuarioDao.listar()) {
+            if (prontuario.getPaciente().getIdPaciente() == idPaciente) {
+                dtm.addRow(new Object[]{prontuario.getIdProntuario(), prontuario.getPaciente().getNOME(), prontuario.getMedico().getNOME(), prontuario.getLeito().getDescricao(), prontuario.getDataEntrada(), prontuario.getDataAlta()});
+            }
         }
     }
 
@@ -49,6 +62,7 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         btnAlta = new javax.swing.JButton();
+        btnDiagnostico = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
 
@@ -96,6 +110,14 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
 
         btnAlta.setText("Alta");
 
+        btnDiagnostico.setText("Diagnostico");
+        btnDiagnostico.setEnabled(false);
+        btnDiagnostico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDiagnosticoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -104,6 +126,8 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
                 .addGap(33, 33, 33)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
@@ -113,9 +137,11 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(btnAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnAlta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDiagnostico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -133,19 +159,43 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setPainel(JDesktopPane painel) {
+        
+        this.painel = painel;
+    }
+
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    private void btnDiagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosticoActionPerformed
+        if (diagnostico) {
+            if (dtm.getRowCount() > 0){
+                    String idProntuario = dtm.getValueAt(tabela.getSelectedRow(), 0).toString();
+                    String dataE = dtm.getValueAt(tabela.getSelectedRow(), 4).toString();
+                    telaDiagnostico.defineProntuario(dataE, idProntuario);
+                    JOptionPane.showMessageDialog(rootPane, "Prontuario selecionado !");
+                    this.setVisible(false);
+            }else
+                JOptionPane.showMessageDialog(rootPane, "Nao existe prontuario !");
+        } else {
+            
+                TelaExibirDiagnostico telaExibeD = new TelaExibirDiagnostico();
+                telaExibeD.setVisible(true);
+                painel.add(telaExibeD);
+            
+        }
+    }//GEN-LAST:event_btnDiagnosticoActionPerformed
+
     public void setIdPaciente(int idP) {
         this.idPaciente = idP;
-        
+
     }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlta;
+    private javax.swing.JButton btnDiagnostico;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
