@@ -6,25 +6,44 @@
 package modelo;
 
 import java.sql.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Ricardo
  */
+@Entity
 public class Procedimento {
-    private int idProcedimento,idMedicamento,idProntuario;
-    private java.sql.Date dataInicial,dataFinal;
-    private String descricao,observacao;
+    @Id 
+    @GeneratedValue(strategy=GenerationType.IDENTITY) 
+    private int idProcedimento;
+    @ManyToOne
+    private Medicamento medicamento;
+    @ManyToOne
+    private Prontuario prontuario;
+    @Column
+    private java.sql.Date dataInicial;
+    @Column
+    private java.sql.Date dataFinal;
+    @Column
+    private String descricao;
+    @Column
+    private String observacao;
 
+    
     public Procedimento() {
     }
 
-    public Procedimento(int idProntuario, Date dataInicial, Date dataFinal, String descricao, String observacao) {
-        this.idProntuario = idProntuario;
+    public Procedimento(Medicamento medicamento, Prontuario prontuario, Date dataInicial, String descricao) {
+        this.medicamento = medicamento;
+        this.prontuario = prontuario;
         this.dataInicial = dataInicial;
-        this.dataFinal = dataFinal;
         this.descricao = descricao;
-        this.observacao = observacao;
     }
 
     public int getIdProcedimento() {
@@ -35,20 +54,20 @@ public class Procedimento {
         this.idProcedimento = idProcedimento;
     }
 
-    public int getIdMedicamento() {
-        return idMedicamento;
+    public Medicamento getMedicamento() {
+        return medicamento;
     }
 
-    public void setIdMedicamento(int idMedicamento) {
-        this.idMedicamento = idMedicamento;
+    public void setMedicamento(Medicamento medicamento) {
+        this.medicamento = medicamento;
     }
 
-    public int getIdProntuario() {
-        return idProntuario;
+    public Prontuario getProntuario() {
+        return prontuario;
     }
 
-    public void setIdProntuario(int idProntuario) {
-        this.idProntuario = idProntuario;
+    public void setProntuario(Prontuario prontuario) {
+        this.prontuario = prontuario;
     }
 
     public Date getDataInicial() {
@@ -82,5 +101,7 @@ public class Procedimento {
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
+
+    
     
 }

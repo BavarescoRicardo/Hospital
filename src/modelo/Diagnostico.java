@@ -5,21 +5,32 @@
  */
 package modelo;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  *
  * @author Ricardo
  */
+@Entity
 public class Diagnostico {
-  private int idDiagnostico,idDoenca,idProntuario;
-  private String STATUS;
 
-    public Diagnostico(int idDoenca, int idProntuario, String STATUS) {
-        this.idDoenca = idDoenca;
-        this.idProntuario = idProntuario;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idDiagnostico;
+    @ManyToOne
+    private Doenca doenca;
+    @ManyToOne
+    private Prontuario prontuario;
+    private String STATUS;
+
+    public Diagnostico(Doenca doenca, Prontuario prontuario, String STATUS) {
+        this.doenca = doenca;
+        this.prontuario = prontuario;
         this.STATUS = STATUS;
-    }
-
-    public Diagnostico() {
     }
 
     public int getIdDiagnostico() {
@@ -30,20 +41,20 @@ public class Diagnostico {
         this.idDiagnostico = idDiagnostico;
     }
 
-    public int getIdDoenca() {
-        return idDoenca;
+    public Doenca getDoenca() {
+        return doenca;
     }
 
-    public void setIdDoenca(int idDoenca) {
-        this.idDoenca = idDoenca;
+    public void setDoenca(Doenca doenca) {
+        this.doenca = doenca;
     }
 
-    public int getIdProntuario() {
-        return idProntuario;
+    public Prontuario getProntuario() {
+        return prontuario;
     }
 
-    public void setIdProntuario(int idProntuario) {
-        this.idProntuario = idProntuario;
+    public void setProntuario(Prontuario prontuario) {
+        this.prontuario = prontuario;
     }
 
     public String getSTATUS() {
@@ -53,6 +64,5 @@ public class Diagnostico {
     public void setSTATUS(String STATUS) {
         this.STATUS = STATUS;
     }
-  
-  
+
 }

@@ -119,7 +119,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         btnFuncionario = new javax.swing.JButton();
         btnListaPacient = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnDiagnostico = new javax.swing.JButton();
         ImageIcon fundo = new ImageIcon(getClass().getResource("/imagens/fundo.jpg"));
         Image img = fundo.getImage();
         painelDesktop = new javax.swing.JDesktopPane(){
@@ -214,9 +214,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         painelBotoes.add(btnListaPacient);
 
-        jButton3.setText(".");
-        jButton3.setEnabled(false);
-        painelBotoes.add(jButton3);
+        btnDiagnostico.setText("Diagnostico");
+        btnDiagnostico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDiagnosticoActionPerformed(evt);
+            }
+        });
+        painelBotoes.add(btnDiagnostico);
 
         jPanel3.setBackground(new java.awt.Color(254, 254, 254));
         jPanel3.setLayout(new java.awt.GridLayout(2, 4, 50, 10));
@@ -393,6 +397,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelDesktop.add(novoProntuario);
     }//GEN-LAST:event_btnProntuarioActionPerformed
 
+    private void btnDiagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosticoActionPerformed
+        TelaDiagnostico telaDiagnostico = new TelaDiagnostico();
+        telaDiagnostico.setPainel(painelDesktop);
+        telaDiagnostico.setVisible(true);
+        painelDesktop.add(telaDiagnostico);
+        
+    }//GEN-LAST:event_btnDiagnosticoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -429,6 +441,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDiagnostico;
     private javax.swing.JButton btnDoenca;
     private javax.swing.JButton btnFuncionario;
     private javax.swing.JButton btnListaPacient;
@@ -438,7 +451,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnQuarto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;

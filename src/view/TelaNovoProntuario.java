@@ -259,17 +259,40 @@ public class TelaNovoProntuario extends javax.swing.JInternalFrame {
         int idL = Integer.parseInt(lbIdLeito.getText());
         int idM = Integer.parseInt(lbIdMedico.getText());
         if ( idP  > 0 & idL > 0 && idM > 0 ){ 
-            Paciente paciente = pacienteDao.getById(idP);
-            Leito leito = leitoDao.getById(idL);
-            Medico medico = medicoDao.getById(idM);
             // data d entrada é a data atual 
             java.util.Date dataAtual = new java.util.Date();
             java.sql.Date dataEntrada = new java.sql.Date(dataAtual.getTime()); 
             
-            Prontuario prontuario = new Prontuario(paciente, leito, medico, dataEntrada);
-            protuarioDao.salvar(prontuario);
+            Paciente paciente = pacienteDao.getById(idP);
+            Leito leito = leitoDao.getById(idL);
+            Medico medico = medicoDao.getById(idM);
             
-            JOptionPane.showMessageDialog(rootPane,"Novo prontuario salvo !");
+            Prontuario prontuario = new Prontuario(paciente, leito, medico, dataEntrada);
+            
+            // verifica se ja existe um prontuario para o paciente escolhido
+            boolean existente = false;
+            int idAntigo;
+            for (Prontuario p : protuarioDao.listar()){
+                if (p.getPaciente().getIdPaciente() == idP){
+                    existente = true;
+                    idAntigo = p.getIdProntuario();
+                    
+                    prontuario =  protuarioDao.getById(idAntigo);
+                    prontuario.setLeito(leito);
+                    prontuario.setMedico(medico);
+                    prontuario.setDataEntrada(dataEntrada);
+                }
+            }
+            
+            
+            if (existente){
+                protuarioDao.alterar(prontuario);
+                JOptionPane.showMessageDialog(rootPane,"Prontuario atualizado !");
+            }else{
+                protuarioDao.salvar(prontuario);
+                JOptionPane.showMessageDialog(rootPane,"Novo prontuario salvo !");
+            }
+            
             
         }else
             JOptionPane.showMessageDialog(rootPane, "Selecione todos os campos !!");
