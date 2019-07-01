@@ -8,6 +8,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import modelo.Medico;
 import servico.Gerenciador;
 
@@ -16,42 +17,50 @@ import servico.Gerenciador;
  * @author blank
  */
 public class MedicoDao {
-    
+
     private EntityManager em;
 
     public MedicoDao() {
         this.em = Gerenciador.getInstancia().getEm();
     }
-    
-    
+
     public void salvar(Medico m) {
 
         em.getTransaction().begin();
         em.persist(m);
         em.getTransaction().commit();
     }
-    
-    public List<Medico> listar(){
+
+    public List<Medico> listar() {
         List<Medico> lista = new ArrayList<Medico>();
-         lista = em.createQuery("from Medico m").getResultList();
-        
+        lista = em.createQuery("from Medico m").getResultList();
+
         return lista;
     }
-    
-    public void remove(Medico m){
-        
+
+    public void remove(Medico m) {
+
         em.getTransaction().begin();
         em.remove(m);
         em.getTransaction().commit();
-    
+
     }
-    
-        
-    public Medico getById (int id){
+
+    public List<Medico> filtrar(String filtro) {
+        List<Medico> lista = new ArrayList<Medico>();
+
+        Query q = em.createQuery("from Medico m WHERE m.NOME like :filtro");
+        q.setParameter("filtro", filtro + "%");
+        lista = (List<Medico>) q.getResultList();
+
+        return lista;
+    }
+
+    public Medico getById(int id) {
         return em.find(Medico.class, id);
     }
-    
-    public void alterar(Medico m){
+
+    public void alterar(Medico m) {
         em.getTransaction().begin();
         em.merge(m);
         em.getTransaction().commit();

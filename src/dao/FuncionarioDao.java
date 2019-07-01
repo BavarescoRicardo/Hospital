@@ -41,11 +41,6 @@ public class FuncionarioDao {
     
      public List<Funcionario> filtroNome(String filtro){
         List<Funcionario> lista = new ArrayList<Funcionario>();
-        
-       // string hql = “from Produto p where p.nome like :nome”;
-    // IQuery q = session.CreateQuery(hql);
-    // q.SetString(“nome”, “%” + aqui_vai_o_valor+ “%”);
-         System.out.println("Filtrar os funcionario pelo nome iniciando com: J");
     
          Query q = em.createQuery("from Funcionario f WHERE f.NOME like :filtro");
           q.setParameter("filtro", filtro+"%");

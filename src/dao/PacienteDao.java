@@ -8,6 +8,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import modelo.Paciente;
 import servico.Gerenciador;
 
@@ -51,5 +52,15 @@ public class PacienteDao {
         em.getTransaction().begin();
         em.merge(p);
         em.getTransaction().commit();
+    }
+    
+        public List<Paciente> filtrar(String filtro) {
+        List<Paciente> lista = new ArrayList<Paciente>();
+
+        Query q = em.createQuery("from Paciente p WHERE p.NOME like :filtro");
+        q.setParameter("filtro", filtro + "%");
+        lista = (List<Paciente>) q.getResultList();
+
+        return lista;
     }
 }
