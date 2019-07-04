@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
  *
  * @author Ricardo
  */
+
 @Entity
 public class Procedimento {
     @Id 
@@ -26,6 +27,8 @@ public class Procedimento {
     private Medicamento medicamento;
     @ManyToOne
     private Prontuario prontuario;
+    @ManyToOne
+    private Funcionario funcionario;
     @Column
     private java.sql.Date dataInicial;
     @Column
@@ -39,11 +42,14 @@ public class Procedimento {
     public Procedimento() {
     }
 
-    public Procedimento(Medicamento medicamento, Prontuario prontuario, Date dataInicial, String descricao) {
+    public Procedimento(Medicamento medicamento, Prontuario prontuario, Funcionario funcionario, Date dataInicial, Date dataFinal,String descricao, String observacao) {
         this.medicamento = medicamento;
         this.prontuario = prontuario;
+        this.funcionario = funcionario;
         this.dataInicial = dataInicial;
+        this.dataFinal = dataFinal;
         this.descricao = descricao;
+        this.observacao = observacao;
     }
 
     public int getIdProcedimento() {
@@ -101,6 +107,16 @@ public class Procedimento {
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+
 
     
     

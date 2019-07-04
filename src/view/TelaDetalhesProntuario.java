@@ -23,6 +23,9 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
     private JDesktopPane painel;
     private boolean diagnostico;
     private TelaDiagnostico telaDiagnostico = new TelaDiagnostico();
+    
+    private boolean procedimento;
+    private TelaProcedimento telaProcedimento = new TelaProcedimento();
 
     public TelaDetalhesProntuario() {
         initComponents();
@@ -37,6 +40,17 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
         this.btnDiagnostico.setEnabled(true);
         this.telaDiagnostico = telaDiagnostico;
     }
+    
+       public void setProcedimento(boolean procedimento) {
+        this.procedimento = procedimento;
+    }
+
+    public void setTelaProcedimento(TelaProcedimento telaProcedimento) {
+        this.btnProcedimento.setEnabled(true);
+        this.telaProcedimento = telaProcedimento;
+    }
+    
+ 
 
     public void attTabela() {
         
@@ -68,6 +82,7 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
         tabela = new javax.swing.JTable();
         btnAlta = new javax.swing.JButton();
         btnDiagnostico = new javax.swing.JButton();
+        btnProcedimento = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
 
@@ -127,6 +142,13 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
             }
         });
 
+        btnProcedimento.setText("Procedimento");
+        btnProcedimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcedimentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -135,6 +157,8 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
                 .addGap(33, 33, 33)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnProcedimento)
+                .addGap(18, 18, 18)
                 .addComponent(btnDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,12 +169,12 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnAlta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDiagnostico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 15, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(btnAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProcedimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDiagnostico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -207,6 +231,28 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
         telaCalendario.setVisible(true);
     }//GEN-LAST:event_btnAltaActionPerformed
 
+    private void btnProcedimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcedimentoActionPerformed
+        String idProntuario = dtm.getValueAt(0, 0).toString();
+        if (procedimento) {
+            if (dtm.getRowCount() > 0){
+                    
+                    String dataE = dtm.getValueAt(0, 4).toString();
+                    telaProcedimento.defineProntuario(dataE, idProntuario);
+                    JOptionPane.showMessageDialog(rootPane, "Prontuario selecionado !");
+                    this.setVisible(false);
+            }else
+                JOptionPane.showMessageDialog(rootPane, "Nao existe prontuario !");
+        } else {
+            
+                TelaExibirDiagnostico telaExibeD = new TelaExibirDiagnostico();
+                telaExibeD.setIdProntuario(Integer.parseInt(idProntuario));
+                telaExibeD.attTabela();
+                telaExibeD.setVisible(true);
+                painel.add(telaExibeD);
+            
+        }
+    }//GEN-LAST:event_btnProcedimentoActionPerformed
+
     public void setIdPaciente(int idP) {
         this.idPaciente = idP;
 
@@ -216,6 +262,7 @@ public class TelaDetalhesProntuario extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnDiagnostico;
+    private javax.swing.JButton btnProcedimento;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

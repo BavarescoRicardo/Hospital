@@ -43,7 +43,7 @@ public class ProcedimentoDao {
     
     public List<Procedimento> listar(){
         List<Procedimento> lista = new ArrayList<Procedimento>();
-         lista = em.createQuery("from Prontuario p").getResultList();
+        lista = em.createQuery("from Procedimento procedimento").getResultList();
         
         return lista;
     }

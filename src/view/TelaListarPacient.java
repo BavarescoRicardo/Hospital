@@ -25,10 +25,11 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
     private JDesktopPane painel;
     private boolean diagnostico;
     private TelaDiagnostico telaDiagnostico = new TelaDiagnostico();
+    
+    
+    private boolean procedimento;
+    private TelaProcedimento telaProcedimento = new TelaProcedimento();
 
-    /**
-     * Creates new form TelaListarPacient
-     */
 
     public TelaListarPacient() {
         initComponents();
@@ -62,6 +63,8 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txtFiltro = new javax.swing.JTextField();
         ntmFiltrar = new javax.swing.JButton();
+        btnProcedimento = new javax.swing.JButton();
+        btnDetalheProc = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
 
@@ -151,6 +154,20 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
             }
         });
 
+        btnProcedimento.setText("Procedimento");
+        btnProcedimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcedimentoActionPerformed(evt);
+            }
+        });
+
+        btnDetalheProc.setText("Detalhe Procedimento");
+        btnDetalheProc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetalheProcActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -159,10 +176,14 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDetalhes, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addComponent(btnDetalhes, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDetalheProc)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(btnProcedimento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,7 +191,7 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ntmFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
@@ -183,7 +204,7 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ntmFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -192,7 +213,9 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
                         .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnProntuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnDetalhes, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDetalhes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProcedimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDetalheProc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -221,6 +244,16 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
     public void setTelaDiagnostico(TelaDiagnostico telaDiagnostico) {
         this.telaDiagnostico = telaDiagnostico;
     }
+    
+    public void setProcedimento(boolean procedimento) {
+        this.procedimento = procedimento;
+    }
+
+    public void setTelaProcedimento(TelaProcedimento telaProcedimento) {
+        this.telaProcedimento = telaProcedimento;
+    }
+    
+    
     
     public void setPainel(JDesktopPane painel) {
         this.painel = painel;
@@ -304,6 +337,7 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
             
             // Verifica se o usuario iniciou na tela diagnostico
             if (diagnostico){
+                
                 detalhe.setDiagnostico(true);
                 detalhe.setTelaDiagnostico(telaDiagnostico);
                 detalhe.setLocation(painel.getWidth() - detalhe.getWidth(), painel.getHeight()/2 - detalhe.getHeight()/2);
@@ -335,10 +369,66 @@ public class TelaListarPacient extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_ntmFiltrarActionPerformed
 
+    private void btnProcedimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcedimentoActionPerformed
+        if (!tabela.getSelectionModel().isSelectionEmpty()){
+            // pega o id do paciente selecionado
+            int idPaciente = Integer.parseInt(dt.getValueAt(tabela.getSelectedRow(),0).toString());
+            
+            TelaDetalhesProntuario detalhe = new TelaDetalhesProntuario();
+            detalhe.setPainel(painel);
+            detalhe.setVisible(true);
+            
+            // Verifica se o usuario iniciou na tela diagnostico
+            if (procedimento){
+                
+                detalhe.setProcedimento(true);
+                detalhe.setTelaProcedimento(telaProcedimento);
+                detalhe.setLocation(painel.getWidth() - detalhe.getWidth(), painel.getHeight()/2 - detalhe.getHeight()/2);
+            }else
+                detalhe.setLocation(painel.getWidth()/2 - detalhe.getWidth()/6, painel.getHeight()/2 - detalhe.getHeight()/2);
+            
+            detalhe.setIdPaciente(idPaciente);
+            detalhe.attTabela();
+            painel.add(detalhe);
+            
+        }else
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma linha da tabela !");
+    }//GEN-LAST:event_btnProcedimentoActionPerformed
+
+    private void btnDetalheProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalheProcActionPerformed
+        if (!tabela.getSelectionModel().isSelectionEmpty()){
+            // pega o id do paciente selecionado
+            int idPaciente = Integer.parseInt(dt.getValueAt(tabela.getSelectedRow(),0).toString());
+            
+            TelaDetalheProcedimento detalhe = new TelaDetalheProcedimento();
+            detalhe.setPainel(painel);
+            detalhe.setVisible(true);
+            
+            // Verifica se o usuario iniciou na tela diagnostico
+            if (procedimento){
+                
+                detalhe.setProcedimento(true);
+                detalhe.setTelaProcedimento(telaProcedimento);
+                detalhe.setLocation(painel.getWidth() - detalhe.getWidth(), painel.getHeight()/2 - detalhe.getHeight()/2);
+            }else
+                detalhe.setLocation(painel.getWidth()/2 - detalhe.getWidth()/6, painel.getHeight()/2 - detalhe.getHeight()/2);
+            
+            detalhe.setIdPaciente(idPaciente);
+            detalhe.attTabela();
+            painel.add(detalhe);
+            
+        }else
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma linha da tabela !");
+            
+        
+    }//GEN-LAST:event_btnDetalheProcActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDetalheProc;
     private javax.swing.JButton btnDetalhes;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnProcedimento;
     private javax.swing.JButton btnProntuario;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnVoltar;

@@ -69,6 +69,16 @@ public class FuncionarioDao {
        public Funcionario getById (int id){
         return em.find(Funcionario.class, id);
     }
+       
+       public List<Funcionario> filtrar(String filtro) {
+        List<Funcionario> lista = new ArrayList<Funcionario>();
+
+        Query q = em.createQuery("from Funcionario m WHERE m.NOME like :filtro");
+        q.setParameter("filtro", filtro + "%");
+        lista = (List<Funcionario>) q.getResultList();
+
+        return lista;
+    }
 
     
 }

@@ -16,6 +16,7 @@
     <class>modelo.Prontuario</class>
     <class>modelo.Procedimento</class>
     <class>modelo.Diagnostico</class>
+    <validation-mode>NONE</validation-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hospitalHiberAuditavel?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

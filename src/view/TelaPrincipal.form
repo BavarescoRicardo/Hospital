@@ -65,8 +65,8 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
         <Property name="columns" type="int" value="3"/>
         <Property name="horizontalGap" type="int" value="30"/>
-        <Property name="verticalGap" type="int" value="20"/>
         <Property name="rows" type="int" value="2"/>
+        <Property name="verticalGap" type="int" value="20"/>
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -154,8 +154,8 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="4"/>
             <Property name="horizontalGap" type="int" value="50"/>
-            <Property name="verticalGap" type="int" value="10"/>
             <Property name="rows" type="int" value="2"/>
+            <Property name="verticalGap" type="int" value="10"/>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnDoenca">
@@ -233,8 +233,8 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="4"/>
             <Property name="horizontalGap" type="int" value="50"/>
-            <Property name="verticalGap" type="int" value="10"/>
             <Property name="rows" type="int" value="2"/>
+            <Property name="verticalGap" type="int" value="10"/>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JButton" name="jButton7">
@@ -277,11 +277,16 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuartoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btnProcedimento">
               <Properties>
-                <Property name="text" type="java.lang.String" value="."/>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="text" type="java.lang.String" value="Procedimento"/>
+                <Property name="enabled" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="true" type="code"/>
+                </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProcedimentoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

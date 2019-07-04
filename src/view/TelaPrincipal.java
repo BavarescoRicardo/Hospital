@@ -133,7 +133,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnProntuario = new javax.swing.JButton();
         btnNovoPaciente = new javax.swing.JButton();
         btnQuarto = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnProcedimento = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         menuTelas = new javax.swing.JMenu();
 
@@ -265,9 +265,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jPanel3.add(btnQuarto);
 
-        jButton1.setText(".");
-        jButton1.setEnabled(false);
-        jPanel3.add(jButton1);
+        btnProcedimento.setText("Procedimento");
+        btnProcedimento.setEnabled(true);
+        btnProcedimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcedimentoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnProcedimento);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -405,6 +410,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnDiagnosticoActionPerformed
 
+    private void btnProcedimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcedimentoActionPerformed
+        TelaProcedimento telaProcedimento = new TelaProcedimento();
+        telaProcedimento.setPainel(painelDesktop);
+        telaProcedimento.setVisible(true);
+        painelDesktop.add(telaProcedimento);
+     
+    }//GEN-LAST:event_btnProcedimentoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -447,9 +460,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnListaPacient;
     private javax.swing.JButton btnMedicamento;
     private javax.swing.JButton btnNovoPaciente;
+    private javax.swing.JButton btnProcedimento;
     private javax.swing.JButton btnProntuario;
     private javax.swing.JButton btnQuarto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
